@@ -1,0 +1,15 @@
+{
+  "name": "plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "GameWebMonetization.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eventemitter3": "^4.0.7"
+  }
+}

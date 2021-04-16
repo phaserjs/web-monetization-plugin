@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Crunch</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        body {
+            background-color: #6b251d;
+            display: flex;
+            flex-direction: column;
+        }
+        .buttons-container {
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .buttons {
+            outline: none;
+            margin-right: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-bg-red {
+            background-color: #ff7675;
+        }
+        
+        .btn-bg-red:hover {
+            background-color: #e09191;
+        }
+
+        .btn-bg-green {
+            background-color: #00b894;
+        }
+
+        .btn-bg-green:hover {
+            background-color: #26c5a5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="buttons-container">
+        <button id="start" class="buttons btn-bg-green">START MONETIZATION</button>
+        <button id="stop" class="buttons btn-bg-red">STOP MONETIZATION</button>
+    </div>
+
+    <div id="game">
+    </div>
+
+
+    <script src="./node_modules/eventemitter3/umd/eventemitter3.min.js"></script>
+    <script src="./node_modules/phaser/dist/phaser.min.js"></script>
+    <script src="./src/main.js" type="module"></script>
+</body>
+</html>
