@@ -2,8 +2,8 @@ import { CandyGrid } from "./GameObjects/CandyGrid.js";
 import PhaserWebMonetization from "./plugins/PhaserWebMonetization/PhaserWebMonetization.js";
 
 export const webmonetization = new PhaserWebMonetization({
-    paymentPointer: '$ilp.uphold.com/YWFr6i7EF7DZ',
-    pointerName: 'Gammafp'
+    paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
+    pointerName: 'Richard'
 });
 
 export const minimun_to_search = 3;
