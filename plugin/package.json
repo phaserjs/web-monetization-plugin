@@ -7,7 +7,8 @@
   "esnext": "dist/GameWebMonetization.js",
   "types": "dist/GameWebMonetization.d.ts",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "dist": "node dist.js"
   },
   "keywords": [ "Web Monetization", "Phaser", "Pixi", "HTML5", "Canvas", "WebGL" ],
   "repository": {
