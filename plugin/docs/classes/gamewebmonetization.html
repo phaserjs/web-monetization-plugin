@@ -2708,6 +2708,18 @@ img {
 				<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a href="gamewebmonetization.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
+				<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a href="gamewebmonetization.html#pending" class="tsd-kind-icon">PENDING</a>
+				</li>
+				<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a href="gamewebmonetization.html#progress" class="tsd-kind-icon">PROGRESS</a>
+				</li>
+				<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a href="gamewebmonetization.html#start" class="tsd-kind-icon">START</a>
+				</li>
+				<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a href="gamewebmonetization.html#stop" class="tsd-kind-icon">STOP</a>
+				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="gamewebmonetization.html#initializeevents" class="tsd-kind-icon">initialize<wbr>Events</a>
 				</li>
@@ -2729,11 +2741,32 @@ img {
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="gamewebmonetization.html#changepaymentpointer" class="tsd-kind-icon">change<wbr>Payment<wbr>Pointer</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="gamewebmonetization.html#start" class="tsd-kind-icon">start</a>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#onprogress" class="tsd-kind-icon">on<wbr>Progress</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#pickpointer" class="tsd-kind-icon">pick<wbr>Pointer</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#removemeta" class="tsd-kind-icon">remove<wbr>Meta</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#setevents" class="tsd-kind-icon">set<wbr>Events</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#setmeta" class="tsd-kind-icon">set<wbr>Meta</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#setpaymentpointer" class="tsd-kind-icon">set<wbr>Payment<wbr>Pointer</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="gamewebmonetization.html#setstatate" class="tsd-kind-icon">set<wbr>Statate</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="gamewebmonetization.html#stop" class="tsd-kind-icon">stop</a>
+					<a href="gamewebmonetization.html#start-1" class="tsd-kind-icon">start</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="gamewebmonetization.html#stop-1" class="tsd-kind-icon">stop</a>
 				</li>
 			</ul>
 		</li>
@@ -2755,6 +2788,9 @@ img {
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/monetizationstopevent.html" class="tsd-kind-icon">Monetization<wbr>Stop<wbr>Event</a>
 		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/paymentconfig.html" class="tsd-kind-icon">Payment<wbr>Config</a>
+		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../modules.html#monetizationevent" class="tsd-kind-icon">Monetization<wbr>Event</a>
 		</li>
@@ -2765,32 +2801,6 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-comment">
-			<div class="tsd-comment tsd-typography">
-				<dl class="tsd-comment-tags">
-					<dt>example</dt>
-					<dd><p>new GameWebMonetization({paymentPointer: $ilp.uphold.com/zdXzL8aWJ4ii, pointerName: &quot;Richard&quot; // Optional});</p>
-					</dd>
-					<dt>example</dt>
-					<dd><p>// if you want to divide your earnings you can use Probalistic Revenue Sharing.
-							// the weight is necesary to know how have more opportunity to be selected each time to game is started (this use Probalistic Revenue Sharing,
-							// more information <a href="https://webmonetization.org/docs/probabilistic-rev-sharing" class="external">HERE</a>
-							new GameWebMonetization([
-							{
-							paymentPointer: $ilp.uphold.com/zdXzL8aWJ4ii,
-							pointerName: &quot;Bob&quot;, // Optional
-							weight: 20
-							},
-							{
-							paymentPointer: $ilp.uphold.com/zdXzL8aWJ4ii,
-							pointerName: &quot;Richard&quot;, // Optional
-							weight: 80
-							}
-						]);</p>
-					</dd>
-				</dl>
-			</div>
-		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2815,6 +2825,15 @@ img {
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
+						<h3>Events</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="gamewebmonetization.html#pending" class="tsd-kind-icon">PENDING</a></li>
+							<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="gamewebmonetization.html#progress" class="tsd-kind-icon">PROGRESS</a></li>
+							<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="gamewebmonetization.html#start" class="tsd-kind-icon">START</a></li>
+							<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="gamewebmonetization.html#stop" class="tsd-kind-icon">STOP</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="gamewebmonetization.html#initializeevents" class="tsd-kind-icon">initialize<wbr>Events</a></li>
@@ -2829,8 +2848,15 @@ img {
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="gamewebmonetization.html#changepaymentpointer" class="tsd-kind-icon">change<wbr>Payment<wbr>Pointer</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="gamewebmonetization.html#start" class="tsd-kind-icon">start</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="gamewebmonetization.html#stop" class="tsd-kind-icon">stop</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#onprogress" class="tsd-kind-icon">on<wbr>Progress</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#pickpointer" class="tsd-kind-icon">pick<wbr>Pointer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#removemeta" class="tsd-kind-icon">remove<wbr>Meta</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#setevents" class="tsd-kind-icon">set<wbr>Events</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#setmeta" class="tsd-kind-icon">set<wbr>Meta</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#setpaymentpointer" class="tsd-kind-icon">set<wbr>Payment<wbr>Pointer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="gamewebmonetization.html#setstatate" class="tsd-kind-icon">set<wbr>Statate</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="gamewebmonetization.html#start-1" class="tsd-kind-icon">start</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="gamewebmonetization.html#stop-1" class="tsd-kind-icon">stop</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2842,7 +2868,7 @@ img {
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Game<wbr>Web<wbr>Monetization<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Game<wbr>Web<wbr>Monetization<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -2851,18 +2877,42 @@ img {
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Creates an instance of GameWebMonetization.</p>
+								<p>Creates an instance of the GameWebMonetization class.</p>
 							</div>
+							<p>TODO - Add lots more detail here.</p>
 							<dl class="tsd-comment-tags">
-								<dt>memberof</dt>
-								<dd><p>GameWebMonetization</p>
+								<dt>example</dt>
+								<dd><pre><code class="language-js"><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GameWebMonetization</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">paymentPointer:</span><span style="color: #000000"> </span><span style="color: #001080">$ilp</span><span style="color: #000000">.</span><span style="color: #001080">uphold</span><span style="color: #000000">.</span><span style="color: #001080">com</span><span style="color: #000000">/</span><span style="color: #001080">zdXzL8aWJ4ii</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">pointerName:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Richard&quot;</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									<p>If you want to divide your earnings you can use Probalistic Revenue Sharing.
+										The weight is necesary to know how have more opportunity to be selected each
+										time to game is started (this use Probalistic Revenue Sharing,
+									more information <a href="https://webmonetization.org/docs/probabilistic-rev-sharing" class="external">HERE</a></p>
+								</dd>
+								<dt>example</dt>
+								<dd><pre><code class="language-js"><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GameWebMonetization</span><span style="color: #000000">([</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">paymentPointer:</span><span style="color: #000000"> </span><span style="color: #001080">$ilp</span><span style="color: #000000">.</span><span style="color: #001080">uphold</span><span style="color: #000000">.</span><span style="color: #001080">com</span><span style="color: #000000">/</span><span style="color: #001080">zdXzL8aWJ4ii</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">pointerName:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Gamma&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">weight:</span><span style="color: #000000"> </span><span style="color: #098658">20</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">paymentPointer:</span><span style="color: #000000"> </span><span style="color: #001080">$ilp</span><span style="color: #000000">.</span><span style="color: #001080">uphold</span><span style="color: #000000">.</span><span style="color: #001080">com</span><span style="color: #000000">/</span><span style="color: #001080">zdXzL8aWJ4ii</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">pointerName:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Richard&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">weight:</span><span style="color: #000000"> </span><span style="color: #098658">80</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">]);</span>
+</code></pre>
 								</dd>
 							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>config: <span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>config: <a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>The Payment Configuration object, or an array of them.</p>
 								</div>
@@ -2871,6 +2921,125 @@ img {
 						<h4 class="tsd-returns-title">Returns <a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></h4>
 					</li>
 				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Events</h2>
+			<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+				<a name="pending" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> PENDING</h3>
+				<div class="tsd-signature tsd-kind-icon">PENDING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;pending&#x27;</span></div>
+				<aside class="tsd-sources">
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The event is emitted while web monetization is preparing to start to monetize your site.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>property</dt>
+						<dd><p>{string} paymentPointer - Your payment account URL. The same value is used as the content in your <meta> tag.</p>
+						</dd>
+						<dt>property</dt>
+						<dd><p>{string} requestId - This value is identical to the session ID/monetization ID (UUID v4) generated by the user agent (see Flow).</p>
+						</dd>
+						<dt>example</dt>
+						<dd><pre><code class="language-js"><span style="color: #008000">// Receives</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  paymentPointer: </span><span style="color: #A31515">&quot;$wallet.example.com/alice&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  requestId: </span><span style="color: #001080">ec4f9dec</span><span style="color: #000000">-0</span><span style="color: #001080">ba4</span><span style="color: #000000">-</span><span style="color: #098658">4029</span><span style="color: #000000">-8</span><span style="color: #001080">f6a</span><span style="color: #000000">-29</span><span style="color: #001080">dc21f2e0ce</span>
+<span style="color: #000000">}</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+				<a name="progress" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> PROGRESS</h3>
+				<div class="tsd-signature tsd-kind-icon">PROGRESS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;progress&#x27;</span></div>
+				<aside class="tsd-sources">
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The event is emitted when the monetization progress.</p>
+					</div>
+					<p>The handler receives a {@link ProgressEvent} object.</p>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><pre><code class="language-js"><span style="color: #008000">// Receives</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  paymentPointer: </span><span style="color: #A31515">&quot;$wallet.example.com/alice&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  requestId: </span><span style="color: #A31515">&quot;ec4f9dec-0ba4-4029-8f6a-29dc21f2e0ce&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  amount: </span><span style="color: #A31515">&quot;7567&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  assetCode: </span><span style="color: #A31515">&quot;USD&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  assetScale: </span><span style="color: #098658">2</span><span style="color: #000000">,</span>
+<span style="color: #000000">  receipt: </span><span style="color: #A31515">&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAPoAAAAAF5h2Mk=&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  totalAmount: </span><span style="color: #098658">0.000328153</span>
+<span style="color: #000000">}</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+				<a name="start" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> START</h3>
+				<div class="tsd-signature tsd-kind-icon">START<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;start&#x27;</span></div>
+				<aside class="tsd-sources">
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The event is emitted when the monetization is started, with this event you can show or hiden some ads or give some powerup to player.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>property</dt>
+						<dd><p>{string} paymentPointer - Your payment account URL. The same value is used as the content in your <meta> tag.</p>
+						</dd>
+						<dt>property</dt>
+						<dd><p>{string} requestId - This value is identical to the session ID/monetization ID (UUID v4) generated by the user agent (see Flow).</p>
+						</dd>
+						<dt>example</dt>
+						<dd><pre><code class="language-js"><span style="color: #008000">// Receives</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  paymentPointer: </span><span style="color: #A31515">&quot;$wallet.example.com/alice&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  requestId: </span><span style="color: #001080">ec4f9dec</span><span style="color: #000000">-0</span><span style="color: #001080">ba4</span><span style="color: #000000">-</span><span style="color: #098658">4029</span><span style="color: #000000">-8</span><span style="color: #001080">f6a</span><span style="color: #000000">-29</span><span style="color: #001080">dc21f2e0ce</span>
+<span style="color: #000000">}</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+				<a name="stop" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> STOP</h3>
+				<div class="tsd-signature tsd-kind-icon">STOP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;stop&#x27;</span></div>
+				<aside class="tsd-sources">
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The event is emitted when the monetization is stopped.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>property</dt>
+						<dd><p>{string} paymentPointer - Your payment account URL. The same value is used as the content in your <meta> tag.</p>
+						</dd>
+						<dt>property</dt>
+						<dd><p>{string} requestId - This value is identical to the session ID/monetization ID (UUID v4) generated by the user agent (see Flow).</p>
+						</dd>
+						<dt>property</dt>
+						<dd><p>{boolean} finalized - When true, the monetization tag has been removed or the paymentPointer changed. No more events with this requestId expected.</p>
+						</dd>
+						<dt>example</dt>
+						<dd><pre><code class="language-js"><span style="color: #008000">// Receives</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  paymentPointer: </span><span style="color: #A31515">&quot;$wallet.example.com/alice&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  requestId: </span><span style="color: #001080">ec4f9dec</span><span style="color: #000000">-0</span><span style="color: #001080">ba4</span><span style="color: #000000">-</span><span style="color: #098658">4029</span><span style="color: #000000">-8</span><span style="color: #001080">f6a</span><span style="color: #000000">-29</span><span style="color: #001080">dc21f2e0ce</span><span style="color: #000000">,</span>
+<span style="color: #000000">  finalized: </span><span style="color: #0000FF">false</span>
+<span style="color: #000000">}</span>
+</code></pre>
+						</dd>
+					</dl>
+				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -2883,13 +3052,8 @@ img {
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>?</p>
+						<p>TODO</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
-					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -2905,9 +3069,6 @@ img {
 					<dl class="tsd-comment-tags">
 						<dt>readonly</dt>
 						<dd></dd>
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
 					</dl>
 				</div>
 			</section>
@@ -2919,12 +3080,9 @@ img {
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>?</p>
+						<p>TODO</p>
 					</div>
 					<dl class="tsd-comment-tags">
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
 						<dt>readonly</dt>
 						<dd></dd>
 					</dl>
@@ -2942,9 +3100,6 @@ img {
 						passed it in configuration.</p>
 					</div>
 					<dl class="tsd-comment-tags">
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
 						<dt>readonly</dt>
 						<dd></dd>
 					</dl>
@@ -2953,7 +3108,7 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="state" class="tsd-anchor"></a>
 				<h3>state</h3>
-				<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2964,9 +3119,6 @@ img {
 					<dl class="tsd-comment-tags">
 						<dt>readonly</dt>
 						<dd></dd>
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
 					</dl>
 				</div>
 			</section>
@@ -2978,13 +3130,8 @@ img {
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>?</p>
+						<p>TODO</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt>memberof</dt>
-						<dd><p>GameWebMonetization</p>
-						</dd>
-					</dl>
 				</div>
 			</section>
 		</section>
@@ -2994,7 +3141,7 @@ img {
 				<a name="changepaymentpointer" class="tsd-anchor"></a>
 				<h3>change<wbr>Payment<wbr>Pointer</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">change<wbr>Payment<wbr>Pointer<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
+					<li class="tsd-signature tsd-kind-icon">change<wbr>Payment<wbr>Pointer<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -3002,30 +3149,187 @@ img {
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Sets payment or payments pointer by configuration.
-								To make efective the change you need use stop and start methods.</p>
+								<p>Sets payment or payments pointer by configuration.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>memberof</dt>
-								<dd><p>GameWebMonetization</p>
-								</dd>
-							</dl>
+							<p>To make efective the change you need use stop and start methods.</p>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>config: <span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PaymentConfig</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>config: <a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>The Payment Configuration object, or an array of them.</p>
 								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></h4>
+						<p>The GameWebMonetization instance.</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="onprogress" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> on<wbr>Progress</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">on<wbr>Progress<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/monetizationprogressevent.html" class="tsd-signature-type" data-tsd-kind="Interface">MonetizationProgressEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to get the the total of amount and emit the progress event.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>event: <a href="../interfaces/monetizationprogressevent.html" class="tsd-signature-type" data-tsd-kind="Interface">MonetizationProgressEvent</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The &#39;monetizationprogress&#39; event.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="pickpointer" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> pick<wbr>Pointer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">pick<wbr>Pointer<span class="tsd-signature-symbol">(</span>pointers<span class="tsd-signature-symbol">: </span><a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to select one paymentPointer from the configuration</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>pointers: <a href="../interfaces/paymentconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">PaymentConfig</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>An array of Payment Configuration objects.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>TODO</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="removemeta" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> remove<wbr>Meta</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">remove<wbr>Meta<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to insert the metatag to monetized your content in the HTML header.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="setevents" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Events</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to initialized all events</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="setmeta" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Meta</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Meta<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to insert the metatag to monetized your content in the HTML header.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="setpaymentpointer" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Payment<wbr>Pointer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Payment<wbr>Pointer<span class="tsd-signature-symbol">(</span>paymentPointer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Handles the paymentPointer and set it in this.paymentPointer member.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>paymentPointer: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>TODO</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="setstatate" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Statate</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">set<wbr>Statate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Help to set the actual monetization state.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="start" class="tsd-anchor"></a>
+				<a name="start-1" class="tsd-anchor"></a>
 				<h3>start</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 					<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
@@ -3038,18 +3342,14 @@ img {
 							<div class="lead">
 								<p>This method helps us to try to initialize the monetization.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>memberof</dt>
-								<dd><p>GameWebMonetization</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-returns-title">Returns <a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></h4>
+						<p>The GameWebMonetization instance.</p>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="stop" class="tsd-anchor"></a>
+				<a name="stop-1" class="tsd-anchor"></a>
 				<h3>stop</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 					<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></li>
@@ -3060,15 +3360,11 @@ img {
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Stop the monetization</p>
+								<p>Stop the monetization.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>memberof</dt>
-								<dd><p>GameWebMonetization</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-returns-title">Returns <a href="gamewebmonetization.html" class="tsd-signature-type" data-tsd-kind="Class">GameWebMonetization</a></h4>
+						<p>The GameWebMonetization instance.</p>
 					</li>
 				</ul>
 			</section>
@@ -3084,6 +3380,9 @@ img {
 					</ul>
 					<ul class="tsd-legend">
 						<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+					</ul>
+					<ul class="tsd-legend">
+						<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 					</ul>
 				</div>
 			</div>

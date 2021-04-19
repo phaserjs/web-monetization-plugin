@@ -93,7 +93,7 @@ async function buildDocs ()
         entryPoints: [ `${src}/${name}.ts` ],
         tsconfig: './tsconfig.json',
         excludeExternals: true,
-        excludePrivate: true,
+        excludePrivate: false,
         name,
         disableSources: true,
         theme: 'minimal'

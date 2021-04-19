@@ -279,10 +279,10 @@ var GameWebMonetization = class extends import_eventemitter3.EventEmitter {
       document.monetization.addEventListener("monetizationstart", (event) => {
         this.setStatate();
         this.isMonetized = true;
-        this.emit("start", event.detail);
+        this.emit(this.START, event.detail);
       });
       document.monetization.addEventListener("monetizationpending", (event) => {
-        this.emit("pending", event.detail);
+        this.emit(this.PENDING, event.detail);
       });
       document.monetization.addEventListener("monetizationstop", (event) => {
         if (this.state !== "stopped") {
@@ -318,6 +318,8 @@ var GameWebMonetization = class extends import_eventemitter3.EventEmitter {
     }
   }
 };
+GameWebMonetization.START = "start";
+GameWebMonetization.PENDING = "pending";
 export {
   GameWebMonetization
 };
