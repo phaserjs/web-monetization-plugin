@@ -1,47 +1,43 @@
 const { buildSync } = require('esbuild');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
 const fs = require('fs-extra');
 const rollup = require('rollup');
 const rollupTypeScript = require('@rollup/plugin-typescript');
+const tsc = require('node-typescript-compiler')
 const TypeDoc = require('typedoc');
 
-const package = fs.readJsonSync(fx + '/package.json');
+const tsconfig = fs.readJsonSync('./tsconfig.json');
+const package = fs.readJsonSync('./package.json');
 
-const shortName = package.displayName;
-const fullName = package.description;
-const version = package.version;
+const name = package.displayName;
 
-const src = '/src/';
-const dist = '/dist/';
-const docs = '/docs/';
+const src = './src/';
+const dist = './dist/';
+const docs = './docs/';
 
 async function buildES6 ()
 {
     fs.emptyDirSync(dist);
     
     buildSync({
-        entryPoints: '/src/GameWebMonetization.ts',
-        outfile: '/dist/GameWebMonetization.js',
+        entryPoints: [ `${src}/${name}.ts` ],
+        outfile: `${dist}/${name}.js`,
         target: 'es6',
         format: 'esm',
         bundle: true
     });
-    
-    // let data = fs.readFileSync(outfile, { encoding: 'utf8' });
-    
-    // data = data.replace('import Phaser from "phaser";', '');
         
-    // fs.writeFileSync(outfile, data, 'utf8');
-    
     console.log('ES6 Build Generated ✔️');
 }
-
 
 async function buildES5 ()
 {
     const inputOptions = {
-        input: src + shortName + '.ts',
-        external: [ 'phaser' ],
+        input: `${src}/${name}.ts`,
         plugins: [
+            nodeResolve(),
+            commonjs(),
             rollupTypeScript({
                 target: 'es5',
                 tsconfig: false,
@@ -55,11 +51,11 @@ async function buildES5 ()
     };
 
     const outputOptions = {
-        file: dist + shortName + '.es5.js',
-        name: 'FX',
+        file: `${dist}/${name}.es5.js`,
+        name,
         format: 'iife',
         globals: {
-            'phaser': 'Phaser'
+            'eventemitter3': 'eventemitter3'
         }
     };
 
@@ -80,7 +76,7 @@ async function buildDefs ()
         'declarationDir': dist
     },
     [
-        src + shortName + '.ts'
+        `${src}/${name}.ts`
     ]);
 
     console.log('TypeScript Defs Generated ✔️');
@@ -88,30 +84,17 @@ async function buildDefs ()
 
 async function buildDocs ()
 {
-    //  Prepare index.md
-
-    fs.removeSync(destMedia + 'index.md');
-
-    let index = fs.readFileSync(srcMedia + 'index.md', { encoding: 'utf8' });
-
-    index = index.replace(/FULLNAME/g, fullName);
-    index = index.replace(/NAME/g, shortName);
-
-    fs.writeFileSync(destMedia + 'index.md', index, 'utf8');
-
     const app = new TypeDoc.Application();
     
     app.options.addReader(new TypeDoc.TypeDocReader());
     app.options.addReader(new TypeDoc.TSConfigReader());
 
     app.bootstrap({
-        entryPoints: [ src + shortName + '.ts' ],
-        media: destMedia,
-        readme: destMedia + 'index.md',
+        entryPoints: [ `${src}/${name}.ts` ],
         tsconfig: './tsconfig.json',
         excludeExternals: true,
         excludePrivate: true,
-        name: fullName,
+        name,
         disableSources: true,
         theme: 'minimal'
     });
@@ -131,12 +114,12 @@ async function buildDocs ()
 
 async function run ()
 {
-    console.log('Building');
+    console.log('Building GameWebMonetization ...');
 
     await buildES6();
-    // await buildES5();
-    // await buildDefs();
-    // await buildDocs();
+    await buildES5();
+    await buildDefs();
+    await buildDocs();
 }
 
 run();

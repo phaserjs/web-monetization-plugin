@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "target": "esnext",
+        "module": "es2015",
+        "lib": [ "DOM", "DOM.Iterable", "ES5", "ES6", "ESNext", "ScriptHost" ],
+        "emitDeclarationOnly": true,
+        "noEmitOnError": true,
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "removeComments": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": false,
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": false,
+        "strictPropertyInitialization": false,
+        "suppressImplicitAnyIndexErrors": true
+    }
+}
