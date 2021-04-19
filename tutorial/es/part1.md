@@ -1,6 +1,6 @@
 ---
-title: ¿Qué es Web Monetization?
-subtitle: Part 1 - Qué es Web Monetization?
+title: Web Monetization for Games
+subtitle: Parte 1 - ¿Qué es Web Monetization?
 date: 
 author: Richard Davey
 twitter: photonstorm
