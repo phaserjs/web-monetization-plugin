@@ -9,9 +9,28 @@ export class Menu extends Phaser.Scene {
 
     init() {
         this.popfx = this.sound.add('pop');
-
         this.cameras.main.fadeIn(600, 0, 0, 0);
+    }
 
+    create() {
+        const background = this.add.image(0, 0, 'backgroundstart')
+            .setAlpha(.8)
+            .setOrigin(0);
+
+        const logo = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 50, '3candies')
+            .setScale(0);
+
+        this.tweens.add({
+            targets: logo,
+            duration: 800,
+            ease: Phaser.Math.Easing.Bounce.Out,
+            scale: 1.8
+        });
+        this.buttons();
+
+    }
+
+    buttons() {
         // click to start
         const text_start = this.add.dynamicBitmapText(
             this.sys.game.config.width / 2,
@@ -23,6 +42,7 @@ export class Menu extends Phaser.Scene {
             .setOrigin(.5)
             .setTint(0xf1c40f)
             .setDepth(100);
+       
         this.tweens.add({
             targets: [text_start],
             alpha: 0,
@@ -37,7 +57,7 @@ export class Menu extends Phaser.Scene {
             this.sys.game.config.width / 2,
             this.sys.game.config.height - 150,
             'pixel2',
-            'CHANGE BACKGROUND',
+            'CHOOSE BACKGROUND',
             8)
             .setOrigin(.5);
 
@@ -59,7 +79,7 @@ export class Menu extends Phaser.Scene {
                 'plugin-active': webmonetization.isMonetized
             })
             .setAlpha(
-                webmonetization.isMonetized ? 1 : .2
+                webmonetization.isMonetized ? 1 : .6
             )
             .setName('background_buttons-premium');
 
@@ -117,19 +137,6 @@ export class Menu extends Phaser.Scene {
             }
 
         })
-
-    }
-
-    create() {
-        const logo = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 50, '3candies')
-            .setScale(0);
-
-        this.tweens.add({
-            targets: logo,
-            duration: 800,
-            ease: Phaser.Math.Easing.Bounce.Out,
-            scale: 1
-        });
     }
 
     startGame() {
