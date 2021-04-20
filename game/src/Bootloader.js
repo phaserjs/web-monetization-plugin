@@ -86,7 +86,6 @@ export class Bootloader extends Phaser.Scene {
 
             this.scene.start('Intro');
             // this.scene.start('Menu');
-
             // this.scene.start('MainScene');
         });
     }
