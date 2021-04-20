@@ -30,10 +30,6 @@ gameWebMonetization.on(GameWebMonetization.STOP, (receive) => {
     console.log('[inside event stop] - The state: ', gameWebMonetization.state);
 });
 
-document.monetization.addEventListener('monetizationstop', () => {
-    console.log('Stopped by document event')
-});
-
 setTimeout(() => {
     gameWebMonetization.stop();
 }, 5000);
