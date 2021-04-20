@@ -194,8 +194,11 @@ export class GameWebMonetization extends EventEmitter
      */
     start (): this
     {
-        this.addEvents();
-        this.addMeta();
+        if (document && document.monetization)
+        {
+            this.addEvents();
+            this.addMeta();
+        }
 
         return this;
     }

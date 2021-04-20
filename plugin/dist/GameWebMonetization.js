@@ -243,8 +243,10 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
     this.setState();
   }
   start() {
-    this.addEvents();
-    this.addMeta();
+    if (document && document.monetization) {
+      this.addEvents();
+      this.addMeta();
+    }
     return this;
   }
   stop() {

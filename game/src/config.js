@@ -1,15 +1,15 @@
 import { BackgroundScene } from './scenes/BackgroundScene.js';
 import { Bootloader } from './Bootloader.js';
+import { Intro } from './scenes/Intro.js';
 import { MainScene } from './scenes/MainScene.js';
 import { Menu } from './scenes/Menu.js';
-import { Intro } from './scenes/Intro.js';
 
 export const CONFIG = {
     title: '3Candies',
     version: '1.0.0',
     type: Phaser.AUTO,
     backgroundColor: '#1e272e',
-    disableContextMenu: true,
+    disableContextMenu: false,
     scale: {
         parent: 'game',
         width: 450,
