@@ -31,7 +31,6 @@ export class Intro extends Phaser.Scene {
     }
 
     create() {
-
         const logo_webmonetization = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 80, 'webmonetization')
             .setAlpha(0)
             .setScale(2);

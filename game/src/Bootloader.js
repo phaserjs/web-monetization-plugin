@@ -35,9 +35,7 @@ export class Bootloader extends Phaser.Scene {
         // this.load.image('3candies');
         this.load.image('3candies', '3candiesv2.png');
         this.load.image('webmonetization');
-
         //#endregion
-
 
         this.load.setPath('src/assets/buttons/backgrounds_selector/');
         this.load.image('normal_background-button');
@@ -53,6 +51,7 @@ export class Bootloader extends Phaser.Scene {
         backgrounds.forEach(background => {
             this.load.image(background);
         });
+        this.load.image('backgroundstart');
 
         this.load.setPath('src/assets/candies/');
         candies.forEach(candy => {
