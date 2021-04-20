@@ -340,6 +340,7 @@ export class GameWebMonetization extends EventEmitter
      */
     onPending = (event: MonetizationPendingEvent) =>
     {
+        this.setState();
         this.emit(GameWebMonetization.PENDING, event.detail);
     }
 

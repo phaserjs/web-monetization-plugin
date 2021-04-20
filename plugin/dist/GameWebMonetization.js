@@ -225,6 +225,7 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
       this.emit(_GameWebMonetization.START, event.detail);
     };
     this.onPending = (event) => {
+      this.setState();
       this.emit(_GameWebMonetization.PENDING, event.detail);
     };
     this.onProgress = (event) => {
