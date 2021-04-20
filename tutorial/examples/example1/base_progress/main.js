@@ -1,6 +1,6 @@
 import { GameWebMonetization } from './GameWebMonetization.js';
 
-const gameWebMonetization = new GameWebMonetization({
+var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
 gameWebMonetization.on(GameWebMonetization.START, (e) => {
@@ -10,13 +10,17 @@ gameWebMonetization.on(GameWebMonetization.START, (e) => {
 });
 
 
-gameWebMonetization.start();
-
-setTimeout(() => {
-    gameWebMonetization.stop();
-}, 5000);
-
+console.log(GameWebMonetization.START)
 
 setTimeout(() => {
     gameWebMonetization.start();
-}, 10000);
+}, 2000);
+
+// setTimeout(() => {
+//     gameWebMonetization.stop();
+// }, 5000);
+
+
+// setTimeout(() => {
+//     gameWebMonetization.start();
+// }, 10000);

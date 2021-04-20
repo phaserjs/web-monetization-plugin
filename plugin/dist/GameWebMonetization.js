@@ -214,23 +214,47 @@ var require_eventemitter3 = __commonJS((exports, module) => {
 
 // src/GameWebMonetization.ts
 var import_eventemitter3 = __toModule(require_eventemitter3());
-var GameWebMonetization = class extends import_eventemitter3.EventEmitter {
+var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
   constructor(config) {
     super();
     this.total = 0;
-    this.initializeEvents = true;
     this.isMonetized = false;
-    this.state = void 0;
+    this.onStart = (event) => {
+      this.setState();
+      this.isMonetized = true;
+      this.emit(_GameWebMonetization.START, event.detail);
+    };
+    this.onPending = (event) => {
+      this.emit(_GameWebMonetization.PENDING, event.detail);
+    };
+    this.onProgress = (event) => {
+      this.total += Number(event.detail.amount);
+      const formatted = (this.total * Math.pow(10, -event.detail.assetScale)).toFixed(event.detail.assetScale);
+      this.emit(_GameWebMonetization.PROGRESS, __objSpread(__objSpread({}, event.detail), {totalAmount: formatted}));
+    };
+    this.onStop = (event) => {
+      if (this.state !== "stopped") {
+        this.setState();
+        this.isMonetized = false;
+        this.emit(_GameWebMonetization.STOP, event.detail);
+      }
+    };
     this.changePaymentPointer(config);
-    this.setStatate();
+    this.setState();
   }
   start() {
-    this.setEvents();
-    this.setMeta();
+    this.addEvents();
+    this.addMeta();
     return this;
   }
   stop() {
+    this.removeEvents();
     this.removeMeta();
+    return this;
+  }
+  restart() {
+    this.stop();
+    this.start();
     return this;
   }
   changePaymentPointer(config) {
@@ -269,36 +293,24 @@ var GameWebMonetization = class extends import_eventemitter3.EventEmitter {
       }
     }
   }
-  onProgress(event) {
-    this.total += Number(event.detail.amount);
-    const formatted = (this.total * Math.pow(10, -event.detail.assetScale)).toFixed(event.detail.assetScale);
-    this.emit("progress", __objSpread(__objSpread({}, event.detail), {totalAmount: formatted}));
+  addEvents() {
+    document.monetization.addEventListener("monetizationstart", this.onStart, false);
+    document.monetization.addEventListener("monetizationpending", this.onPending, false);
+    document.monetization.addEventListener("monetizationstop", this.onStop, false);
+    document.monetization.addEventListener("monetizationprogress", this.onProgress, false);
   }
-  setEvents() {
-    if (this.state === "stopped" && this.initializeEvents) {
-      document.monetization.addEventListener("monetizationstart", (event) => {
-        this.setStatate();
-        this.isMonetized = true;
-        this.emit(this.START, event.detail);
-      });
-      document.monetization.addEventListener("monetizationpending", (event) => {
-        this.emit(this.PENDING, event.detail);
-      });
-      document.monetization.addEventListener("monetizationstop", (event) => {
-        if (this.state !== "stopped") {
-          this.setStatate();
-          this.isMonetized = false;
-          this.emit("stop", event.detail);
-        }
-      });
-      document.monetization.addEventListener("monetizationprogress", this.onProgress.bind(this));
-      this.initializeEvents = false;
+  removeEvents() {
+    document.monetization.removeEventListener("monetizationstart", this.onStart, false);
+    document.monetization.removeEventListener("monetizationpending", this.onPending, false);
+    document.monetization.removeEventListener("monetizationstop", this.onStop, false);
+    document.monetization.removeEventListener("monetizationprogress", this.onProgress, false);
+  }
+  setState() {
+    if (document && document.monetization) {
+      this.state = document.monetization.state;
     }
   }
-  setStatate() {
-    this.state = typeof document && document.monetization && document.monetization.state;
-  }
-  setMeta() {
+  addMeta() {
     const checkMeta = document.querySelector('meta[name="monetization"]');
     const monetizationTag = document.createElement("meta");
     monetizationTag.setAttribute("name", "monetization");
@@ -318,8 +330,11 @@ var GameWebMonetization = class extends import_eventemitter3.EventEmitter {
     }
   }
 };
+var GameWebMonetization = _GameWebMonetization;
 GameWebMonetization.START = "start";
 GameWebMonetization.PENDING = "pending";
+GameWebMonetization.STOP = "stop";
+GameWebMonetization.PROGRESS = "progress";
 export {
   GameWebMonetization
 };
