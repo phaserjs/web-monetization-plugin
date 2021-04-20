@@ -237,20 +237,21 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
       if (this.state !== "stopped") {
         this.setState();
         this.isMonetized = false;
-        console.log(_GameWebMonetization.STOP);
         this.emit(_GameWebMonetization.STOP, event.detail);
+        this.removeEvents();
       }
     };
     this.changePaymentPointer(config);
     this.setState();
   }
   start() {
-    this.addEvents();
-    this.addMeta();
+    if (document && document.monetization) {
+      this.addEvents();
+      this.addMeta();
+    }
     return this;
   }
   stop() {
-    this.removeEvents();
     this.removeMeta();
     return this;
   }

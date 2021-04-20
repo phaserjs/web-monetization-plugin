@@ -210,7 +210,6 @@ export class GameWebMonetization extends EventEmitter
      */
     stop (): this
     {
-        this.removeEvents();
         this.removeMeta();
 
         return this;
@@ -380,6 +379,7 @@ export class GameWebMonetization extends EventEmitter
             this.isMonetized = false;
 
             this.emit(GameWebMonetization.STOP, event.detail);
+            this.removeEvents();
         }
     }
 
