@@ -28,8 +28,15 @@ export class Bootloader extends Phaser.Scene {
         this.load.audio('searchsound', ['/search_sound.mp3']);
         this.load.audio('marimba', ['/marimba.mp3']);
         this.load.audio('marimba_reverse', ['/marimba_reverse.mp3']);
-        // this.load.audio('correct', ['/correct.mp3']);
         //#endregion
+
+        //#region LOGO
+        this.load.setPath('src/assets/logos/');
+        this.load.image('3candies');
+        this.load.image('webmonetization');
+
+        //#endregion
+
 
         this.load.setPath('src/assets/buttons/backgrounds_selector/');
         this.load.image('normal_background-button');

@@ -120,6 +120,18 @@ export class Menu extends Phaser.Scene {
 
     }
 
+    create() {
+        const logo = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 50, '3candies')
+            .setScale(0);
+
+        this.tweens.add({
+            targets: logo,
+            duration: 800,
+            ease: Phaser.Math.Easing.Bounce.Out,
+            scale: 1
+        });
+    }
+
     startGame() {
         // Launch background-scene
         this.scene.launch('BackgroundScene');

@@ -31,6 +31,16 @@ export class Intro extends Phaser.Scene {
     }
 
     create() {
+
+        const logo_webmonetization = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 80, 'webmonetization')
+            .setAlpha(0)
+            .setScale(2);
+        this.tweens.add({
+            targets: logo_webmonetization,
+            duration: 1000,
+            alpha: 1
+        });
+
         // Thanks
         this.webmonetization_text = this.add.dynamicBitmapText(
             this.sys.game.config.width / 2,
@@ -39,7 +49,7 @@ export class Intro extends Phaser.Scene {
             `This game uses the Web Monetization Plugin`,
             8,
             1)
-            .setTint(0x1dd1a1)
+            .setTint(0x6ADAAB)
             .setOrigin(0.5);
 
         this.webmonetization_text = this.add.dynamicBitmapText(
