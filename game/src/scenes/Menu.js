@@ -13,9 +13,8 @@ export class Menu extends Phaser.Scene {
     }
 
     create() {
-        const background = this.add.image(0, 0, 'backgroundstart')
-            .setAlpha(.8)
-            .setOrigin(0);
+
+        this.background = this.add.tileSprite(0, 0, 520, 700, 'backgroundstart').setOrigin(0);
 
         const logo = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 50, '3candies')
             .setScale(0);
@@ -28,6 +27,12 @@ export class Menu extends Phaser.Scene {
         });
         this.buttons();
 
+    }
+
+    update ()
+    {
+        this.background.tilePositionX += 0.2;
+        this.background.tilePositionY += 0.3;
     }
 
     buttons() {

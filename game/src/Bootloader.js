@@ -32,8 +32,7 @@ export class Bootloader extends Phaser.Scene {
 
         //#region LOGO
         this.load.setPath('src/assets/logos/');
-        // this.load.image('3candies');
-        this.load.image('3candies', '3candiesv2.png');
+        this.load.image('3candies');
         this.load.image('webmonetization');
         //#endregion
 
@@ -87,7 +86,6 @@ export class Bootloader extends Phaser.Scene {
 
             this.scene.start('Intro');
             // this.scene.start('Menu');
-
             // this.scene.start('MainScene');
         });
     }
