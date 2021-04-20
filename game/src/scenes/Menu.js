@@ -26,7 +26,6 @@ export class Menu extends Phaser.Scene {
             scale: 1.8
         });
         this.buttons();
-
     }
 
     update ()
