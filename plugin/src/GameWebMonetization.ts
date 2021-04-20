@@ -220,13 +220,13 @@ export class GameWebMonetization extends EventEmitter
      * 
      * @returns The GameWebMonetization instance.
      */
-     restart (): this
-     {
-         this.stop();
-         this.start();
- 
-         return this;
-     }
+    restart (): this
+    {
+        this.stop();
+        this.start();
+
+        return this;
+    }
 
     /**
      * Changes the active Payment Pointer to either the given config, or selects
@@ -340,6 +340,7 @@ export class GameWebMonetization extends EventEmitter
     onPending = (event: MonetizationPendingEvent) =>
     {
         this.setState();
+
         this.emit(GameWebMonetization.PENDING, event.detail);
     }
 
@@ -397,13 +398,13 @@ export class GameWebMonetization extends EventEmitter
     /**
      * Removes listeners for all of the WebMonetization events.
      */
-     removeEvents ()
-     {
+    removeEvents ()
+    {
         document.monetization.removeEventListener('monetizationstart', this.onStart, false);
         document.monetization.removeEventListener('monetizationpending', this.onPending, false);
         document.monetization.removeEventListener('monetizationstop', this.onStop, false);
         document.monetization.removeEventListener('monetizationprogress', this.onProgress, false);
-     }
+    }
 
     /**
      * Set the `state` property. See {@link MonetizationState}.
