@@ -15,6 +15,10 @@ export class Bootloader extends Phaser.Scene {
 
         this.load.image('gameover');
         this.load.image('playbutton');
+        this.load.image('intro');
+        this.load.image('introthanks');
+        this.load.image('tori1');
+        this.load.image('tori2');
 
         //#region AUDIO LOAD
         this.load.setPath('src/assets/audio');

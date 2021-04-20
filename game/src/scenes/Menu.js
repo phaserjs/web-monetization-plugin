@@ -7,24 +7,30 @@ export class Menu extends Phaser.Scene {
         });
     }
 
-    init() {
+    init ()
+    {
         this.popfx = this.sound.add('pop');
         this.cameras.main.fadeIn(600, 0, 0, 0);
     }
 
-    create() {
+    create ()
+    {
+        const x = this.scale.width / 2;
 
         this.background = this.add.tileSprite(0, 0, 520, 700, 'backgroundstart').setOrigin(0);
 
-        const logo = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 50, '3candies')
-            .setScale(0);
+        this.tori1 = this.add.image(300, 320, 'tori1');
+        this.tori2 = this.add.image(300, 320, 'tori2').setAlpha(0);
+
+        this.logo = this.add.image(x, 80, '3candies').setScale(0);
 
         this.tweens.add({
-            targets: logo,
+            targets: this.logo,
             duration: 800,
             ease: Phaser.Math.Easing.Bounce.Out,
             scale: 1.8
         });
+
         this.buttons();
     }
 
@@ -34,10 +40,13 @@ export class Menu extends Phaser.Scene {
         this.background.tilePositionY += 0.3;
     }
 
-    buttons() {
+    buttons ()
+    {
+        const x = this.scale.width / 2;
+
         // click to start
         const text_start = this.add.dynamicBitmapText(
-            this.sys.game.config.width / 2,
+            x,
             this.sys.game.config.height / 2 + 40,
             'pixel2Border',
             'CLICK TO START',
@@ -58,14 +67,14 @@ export class Menu extends Phaser.Scene {
 
         // Select backgrounds
         const text_change_background = this.add.dynamicBitmapText(
-            this.sys.game.config.width / 2,
+            x,
             this.sys.game.config.height - 150,
             'pixel2',
             'CHOOSE BACKGROUND',
             8)
             .setOrigin(.5);
 
-        const normal_background_button = this.add.image(this.sys.game.config.width / 2 - 45, this.sys.game.config.height - 100, 'normal_background-button-selected2')
+        const normal_background_button = this.add.image(x - 45, this.sys.game.config.height - 100, 'normal_background-button-selected2')
             .setInteractive({
                 'cursor': 'pointer'
             })
@@ -74,7 +83,7 @@ export class Menu extends Phaser.Scene {
             })
             .setName('background_buttons-normal');
 
-        const premium_background_button = this.add.image(this.sys.game.config.width / 2 + 45, this.sys.game.config.height - 100, 'premium_background-button')
+        const premium_background_button = this.add.image(x + 45, this.sys.game.config.height - 100, 'premium_background-button')
             .setInteractive({
                 'cursor': 'pointer'
             })
@@ -143,10 +152,21 @@ export class Menu extends Phaser.Scene {
         })
     }
 
-    startGame() {
-        // Launch background-scene
-        this.scene.launch('BackgroundScene');
-        this.scene.start('MainScene', { is_from_restart: false });
+    startGame ()
+    {
+        this.tweens.add({
+            targets: this.logo,
+            duration: 2000,
+            ease: Phaser.Math.Easing.Bounce.Out,
+            scale: 0,
+            onComplete: () => {
+                // Launch background-scene
+                this.scene.launch('BackgroundScene');
+                this.scene.start('MainScene', { is_from_restart: false });
+            }
+        });
 
+        this.tori1.setAlpha(0);
+        this.tori2.setAlpha(1);
     }
 }

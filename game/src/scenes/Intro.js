@@ -30,75 +30,46 @@ export class Intro extends Phaser.Scene {
         });
     }
 
-    create() {
-        const logo_webmonetization = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2 - 80, 'webmonetization')
-            .setAlpha(0)
-            .setScale(2);
-        this.tweens.add({
-            targets: logo_webmonetization,
-            duration: 1000,
-            alpha: 1
+    create ()
+    {
+        this.background = this.add.tileSprite(0, 0, 520, 700, 'backgroundstart').setOrigin(0);
+
+        const x = this.scale.width / 2;
+
+        for (let i = 0; i < 8; i++)
+        {
+            const logo = this.add.image(x, 80, 'webmonetization');
+
+            logo.setScale(2);
+    
+            this.tweens.add({
+                targets: logo,
+                duration: 1000,
+                scaleX: -2,
+                yoyo: true,
+                repeat: -1,
+                delay: i * 10,
+            });
+        }
+
+        //  TODO - Display 'introthanks' if they have plugin active
+        //  TODO - Check for plugin to be started and change text accordingly
+
+        this.add.image(x, 240, 'intro');
+
+        const playButton = this.add.image(x, 380, 'playbutton');
+
+        playButton.setInteractive({ cursor: 'pointer' });
+
+        playButton.on(Phaser.Input.Events.POINTER_OVER, () => {
+            playButton.setTint(0x95d2d6);
         });
 
-        // Thanks
-        this.webmonetization_text = this.add.dynamicBitmapText(
-            this.sys.game.config.width / 2,
-            this.sys.game.config.height / 2,
-            'pixel2',
-            `This game uses the Web Monetization Plugin`,
-            8,
-            1)
-            .setTint(0x6ADAAB)
-            .setOrigin(0.5);
-
-        this.webmonetization_text = this.add.dynamicBitmapText(
-            this.sys.game.config.width / 2,
-            this.sys.game.config.height / 2 + 30,
-            'pixel2',
-            `If you activate the plugin
-you will get an exclusive background
-and extra lives
-`,
-            8)
-            .setCenterAlign()
-            .setOrigin(0.5);
-
-        this.webmonetization_text = this.add.dynamicBitmapText(
-            this.sys.game.config.width / 2,
-            this.sys.game.config.height / 2 + 60,
-            'pixel2',
-            `Thank you for supporting us`,
-            8)
-            .setTint('0xe67e22')
-            .setCenterAlign()
-            .setOrigin(0.5);
-
-        const play_button = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height - 100, 'playbutton');
-        play_button.setAlpha(.2);
-
-        this.time.addEvent({
-            delay: 2000,
-            callback: () => {
-                this.tweens.add({
-                    targets: play_button,
-                    alpha: 1,
-                    onComplete: () => {
-                        play_button.setInteractive({
-                            cursor: 'pointer'
-                        });
-                    }
-                });
-            }
+        playButton.on(Phaser.Input.Events.POINTER_OUT, () => {
+            playButton.clearTint();
         });
 
-        play_button.on(Phaser.Input.Events.POINTER_OVER, () => {
-            play_button.setTint(0x95d2d6);
-        });
-        play_button.on(Phaser.Input.Events.POINTER_OUT, () => {
-            play_button.clearTint();
-        });
-
-        play_button.on(Phaser.Input.Events.POINTER_DOWN, () => {
+        playButton.on(Phaser.Input.Events.POINTER_DOWN, () => {
             if (this.change_scene) {
                 this.change_scene = false;
                 this.cameras.main.fadeOut(500, 0, 0, 0);
@@ -108,6 +79,11 @@ and extra lives
                 });
             }
         });
+    }
 
+    update ()
+    {
+        this.background.tilePositionX += 0.2;
+        this.background.tilePositionY += 0.3;
     }
 }
