@@ -67,7 +67,7 @@ Una vez abierto aún te tendrá que salir que el sitio no es monetizable y esto 
 
 ![no monetizable coil plugin](../img/part3/4-nomonetizable.png)
 
-Volvamos a nuestro main.js y ahora iniciamos la monetización con el método start(), te tendría que quedar así:
+Volvamos a nuestro **main.js** y ahora iniciamos la monetización con el método **start()**, te tendría que quedar así:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
@@ -166,33 +166,37 @@ Ahora bien, llama a .isMonetized en cualquier parte de tu juego en donde quieras
 
 El plugin pasa por distintos estados a saber: **started**, **stopped** o **pending**.
 
-//TODO: Continue HERE
+Para saber el estado basta con llamar a la propiedad **.state**, hagamos lo mismo que hicimos con isMonetized pero cambiandolo por **state**, te tendría que quedar el siguiente código: 
 
-Para saber el estado basta con llamar a la propiedad .state, hagamos lo mismo que hicimos con isMonetized pero cambiandolo por state, te tendría que quedar el siguiente código: 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
  
 var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
- 
+
+// New code
 console.log('The state: ', gameWebMonetization.state);
  
 gameWebMonetization.start();
  
-gameWebMonetization.on(GameWebMonetization.START, (receive) => {
-    // Here your code
+gameWebMonetization.on(GameWebMonetization.START, (event) => {
+    // New code
     console.log('[inside event start] - The state: ', gameWebMonetization.state);
 });
 
 ```
+
 Y en la consola podrás ver lo siguiente: 
 
+![the state](../img/part3/8-thesate.png)
 
-Evento pending
+### Evento pending
+
 Ahora te estarás preguntando: ¿y para qué sirve pending?
-Pues este evento o estado emitido cuando el API de webmonetization se prepara para iniciar la monetization: 
-Así que copiaremos el evento start que tenemos en escucha y su console.log pero cambiando la palabra start por pending, tendrías que tener ahora este código: 
+
+Pues este evento o estado emitido cuando el API de webmonetization se prepara para iniciar la monetization:
+copiaremos el evento start que tenemos en escucha y su console.log pero cambiando la palabra start por pending, tendrías que tener ahora este código: 
 
 
 ```javascript
@@ -205,70 +209,185 @@ var gameWebMonetization = new GameWebMonetization({
 console.log('The state: ', gameWebMonetization.state);
  
 gameWebMonetization.start();
- 
-gameWebMonetization.on(GameWebMonetization.PENDING, (receive) => {
-    // Here your code
+
+// New code
+gameWebMonetization.on(GameWebMonetization.PENDING, (event) => {
     console.log('[inside event pending] - The state: ', gameWebMonetization.state);
 });
  
-gameWebMonetization.on(GameWebMonetization.START, (receive) => {
-    // Here your code
+gameWebMonetization.on(GameWebMonetization.START, (event) => {
     console.log('[inside event start] - The state: ', gameWebMonetization.state);
 });
  
 
 ```
-Ahora vamos al navegador y veremos lo siguiente: 
 
-Si te fijas ahora ya obtenemos el estado pendiente. En receive recibimos lo mismo que en el evento **start** así que no hace falta ver que hay ahí dentro.
+Ahora vamos al navegador y veremos lo siguiente:
 
-Evento progress
+![Peding event](../img/part3/9-pending_event.png)
+
+Si te fijas ahora ya obtenemos el estado pendiente. En event recibimos lo mismo que en el evento **start** así que no hace falta ver que hay ahí dentro.
+
+### Evento progress
 Este evento se emite cuando hay un flujo de monetización constante.
 Usaremos el siguiente código para saber el progreso: 
 
 ```javascript
-gameWebMonetization.on(GameWebMonetization.PROGRESS, (receive) => {
-    // Here your code
-    console.log('Progress: ', receive);
+gameWebMonetization.on(GameWebMonetization.PROGRESS, (event) => {
+    console.log('Progress: ', event);
 });
- 
-
 ```
-Esta vez hemos usado un console.log a receive para ver que nos está devolviendo, si abrimos la consola veremos lo siguiente: 
 
-Suena un poco raro, pero esto nos ayudará el progreso de la monetización en cada momento, este event se emite bastantes veces así que cuidado con él.
-Si te fijas lo más destacable sería ver el assetCode y totalAmount.
+Esta vez hemos usado un console.log a event para ver que nos está devolviendo, si abrimos la consola veremos lo siguiente: 
+
+![Progress event](../img/part3/10-progress_event.png)
+
+property | details
+--- | ---
+`paymentPointer` | Tu payment pointer. Es el mismo valor que has usado en la configuración.
+`requestId` | Este valor es un ID de dessión o ID de monetización (UUID v4) generado por el agente de usuario.
+`amount` | La cantidad de destino recibida según se especifica en el paquete del protcolo Interledger (ILP).
+`assetCode` | El código (normalmente tres caracteres) que identifica el tipo de unidad. Una unidad, por ejemplo podría ser una moneda (USD, XRP). 
+`assetScale` | El número de lugares después del decimal para la cantidad. Por ejemplo, si tiene USD con una escala de activos de dos, entonces la unidad mínima divisible es centavos.
+`receipt` | Recibo de STREAM codificado en base64 emitido por el receptor de Web Monetization al proveedor de Web Monetization como prueba de la cantidad total recibida en la transmisión.
+`totalAmount` | La suma de lo que se ha recibido con el paymentPointer actual, si se cambia el paymentPointer, esta cantidad se reiniciará
+
+<br />
+
+Suena un poco raro, pero esto nos ayudará a conocer el progreso de la monetización en cada momento, este event se emite bastantes veces así que cuidado con él.
+
+Si te fijas lo más destacable sería ver el **assetCode** y **totalAmount**.
+
 El assetCode es el tipo de moneda que estamos recibiendo, en este caso es la criptomoneda XRP (no te preocupes, tu wallet convertirá las monedas automáticamente).
-El totalAmount es la cantidad de ingresos que vamos obteniendo por un usuario (este contador se reinicia cada vez que el usuario reinicia el juego).
 
-Evento stop
+El **totalAmount** es la cantidad de ingresos que vamos obteniendo por un usuario (este contador se reinicia cada vez que el usuario reinicia el juego).
+<br />
+
+### Evento stop
+
 Y por último también tenemos el evento stop, así que copia el evento start y cambia start por stop, te tendría que quedar así: 
-
 
 ```javascript
  
-gameWebMonetization.on(GameWebMonetization.STOP, (receive) => {
-    // Here your code
+gameWebMonetization.on(GameWebMonetization.STOP, (event) => {
     console.log('[inside event stop] - The state: ', gameWebMonetization.state);
 });
 
 ```
 Una vez puesto el evento no se va a emitir hasta que llamemos el método stop(), ahora bien lo que haremos será llamar ese método pasado un tiempo.
-Usa setTimeout con cinco segundos y llama al método stop(), te tendría que quedar el siguiente código:
+Usa **setTimeout** con cinco segundos y llama al método stop(), te tendría que quedar el siguiente código:
  
 ```javascript
 gameWebMonetization.on(GameWebMonetization.STOP, (receive) => {
-    // Here your code
     console.log('[inside event stop] - The state: ', gameWebMonetization.state);
 });
  
 setTimeout(() => {
     gameWebMonetization.stop();
 }, 5000);
- 
-
 ```
-Ahora bien, si vas a la consola podrás ver que se emite el evento progress y luego se detiene el plugin y emite el evento stop: 
+Ahora bien, si vas a la consola podrás ver que se emite el evento progress y luego se detiene el plugin y emite el evento stop:
 
+![Event Stop](../img/part3/11-stop_event.png)
 
 Puedes usar el evento de stop para saber en qué momento se detiene tu juego pero recuerda que este evento se emitirá también cuando cambies de ventana ya que se detendrá la monetización.
+
+<br />
+
+## Divide los ingresos
+
+Con el plugin es posible dividir los ingresos para ello usamos reparto probabilistico de ingresos, te recomendamos que veas este enlace para obtener más detalles [aquí](https://webmonetization.org/docs/probabilistic-rev-sharing).
+
+Cuando un usuario acceda a tu juego el plugin es capaz de seleccionar un paymentPointer dependiendo de un peso que asignemos, el peso global no debería pasar al 100% y tu puedes decidir cómo repartir ese peso, si quieres puedes por ejemplo poner a un colaborador un peso de 40 y a ti ponerte 60 y así tienes más posibilidad de que salga tu paymentPointer un 60% más que el de tu compañero que en global solo saldrá un 40%.
+
+Una vez hayas configurado los múltiples paymentPointer el plugin internamente seleccionará uno aleatoriamente (pero teniendo en cuenta el peso) y se continuará trabajando todo igual como se ha enseñado en este tutorial.
+
+Para configurar múltiples puntos de pagos puedes hacerlo modificando la configuración cuando instanciamos el plugin, agregaremos un array con múltiples payment pointer, tal cual el código: 
+
+```javascript
+const gameWebMonetization = new GameWebMonetization([
+    {
+        paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
+        weight: 60
+    },
+    {
+        paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
+        weight: 40
+    }
+]);
+
+```
+
+Ahora si vamos al evento start y hacemos un console.log al receive podremos comprobar que si actualizamos muchas veces el navegador se irán cambiando los payment pointer y eso es debido al peso que hemos asignado: 
+
+
+```javascript
+gameWebMonetization.on(GameWebMonetization.START, (event) => {
+    console.log('[inside event start] - The state: ', event);
+});
+```
+
+Al actualizar muchas veces podrás observar que se cambia el payment pointer: 
+
+![multiples payment pointer 1](../img/part3/12-multiples_payment_pointer_1.png)
+
+
+![multiples payment pointer 2](../img/part3/13-multiples_payment_pointer_2.png)
+
+<br />
+
+Si es un poco difícil saber a quién le pertenece cada payment pointer le podemos pasar en la configuración de manera opcional la propiedad pointerName de esta forma:
+
+```javascript
+const gameWebMonetization = new GameWebMonetization([
+    {
+        paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
+        weight: 60,
+        pointerName: "Bob"
+    },
+    {
+        paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
+        weight: 40,
+        pointerName: "Alice"
+    }
+]);
+
+```
+
+Para saber el nombre simplemente accedemos a la propiedad pointerName, lo haremos dentro del evento start (por ejemplo) de esta forma: 
+
+```javascript
+gameWebMonetization.on(GameWebMonetization.START, (event) => {
+    console.log('[inside event start] - The state: ', gameWebMonetization.pointerName);
+});
+```
+
+Vamos al navegador actualizamos y miramos el nombre: 
+
+![Pointer name 1](../img/part3/14-pointerName1.png)
+
+Y si actualizas podrás observar que se cambia el nombre: 
+
+![Pointer name 2](../img/part3/15-pointerName_2.png)
+
+<br />
+
+### Como cambiar el paymentPointer
+
+Para cambiar el paymentPointer tenemos un método que se llama .**changePaymentPointer()**.
+
+Para usarlo simplemente puedes llamarlo sin ningún problemas y asignar el nuevo paymentPointer de esta forma: 
+
+```javascript
+gameWebMonetization.changePaymentPointer({
+    paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
+    weight: 40,
+    pointerName: "Alice"
+});
+
+```
+Recuerda que el método es parte de la instancia de GameWebMonetization y no es un método estático. 
+
+Ahora bien, **changePaymentPointer()** solo prepara el cambio pero no lo efectua, para que el cambio sea efectivo tendrás que detener la monetización con **.stop()** y luego reanudarla con **.start()**.
+
+Bien ya tienes todo lo necesario para monetizar tus juegos, nos vemos en el siguiente tutorial.
