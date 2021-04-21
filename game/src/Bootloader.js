@@ -1,15 +1,18 @@
-import { backgrounds, candies, lifes_sprites } from "./global_vars.js";
+import { backgrounds, candies, lifes_sprites, webmonetization } from "./global_vars.js";
 
-export class Bootloader extends Phaser.Scene {
-    constructor() {
+export class Bootloader extends Phaser.Scene
+{
+    constructor ()
+    {
         super({
             key: 'Bootloader'
         });
-
     }
 
-    preload() {
+    preload ()
+    {
         this.load.setPath('src/assets/');
+
         this.load.image('candy-container-0');
         this.load.image('candy-container-1');
 
@@ -79,19 +82,18 @@ export class Bootloader extends Phaser.Scene {
         this.load.setPath('src/assets/fonts/');
         this.load.json('fontJSON', 'normal/font.json');
         this.load.image('font', 'normal/font.png');
-
-        this.load.on('complete', () => {
-
-            const fontBordersJSON = this.cache.json.get('fontBordersJSON');
-            this.cache.bitmapFont.add('pixel2Border', Phaser.GameObjects.RetroFont.Parse(this, fontBordersJSON));
-
-            const fontJSON = this.cache.json.get('fontJSON');
-            this.cache.bitmapFont.add('pixel2', Phaser.GameObjects.RetroFont.Parse(this, fontJSON));
-
-            this.scene.start('Intro');
-            // this.scene.start('Menu');
-            // this.scene.start('MainScene');
-        });
     }
 
+    create ()
+    {
+        const fontBordersJSON = this.cache.json.get('fontBordersJSON');
+        this.cache.bitmapFont.add('pixel2Border', Phaser.GameObjects.RetroFont.Parse(this, fontBordersJSON));
+
+        const fontJSON = this.cache.json.get('fontJSON');
+        this.cache.bitmapFont.add('pixel2', Phaser.GameObjects.RetroFont.Parse(this, fontJSON));
+
+        this.scene.start('Intro');
+        // this.scene.start('Menu');
+        // this.scene.start('MainScene');
+    }
 }

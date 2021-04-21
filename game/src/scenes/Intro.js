@@ -1,32 +1,41 @@
-export class Intro extends Phaser.Scene {
-    constructor() {
+import { webmonetization } from "../global_vars.js";
+
+export class Intro extends Phaser.Scene
+{
+    constructor ()
+    {
         super({
             key: 'Intro'
         });
     }
 
-    init() {
+    init ()
+    {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
-        this.change_scene = true;
 
-        const CandySong = this.sound.add('candySong1', {
+        this.changingScene = true;
+
+        const music = this.sound.add('candySong1', {
             loop: true,
             volume: 0
         });
-        CandySong.play();
+
+        music.play();
 
         this.tweens.add({
-            targets: CandySong,
-            volume: .5,
+            targets: music,
+            volume: 0.5,
             duration: 3000
         });
 
-        this.game.events.on('volumedown_mainsong', () => {
-            CandySong.setVolume(.1);
+        this.game.events.on('volumedown_mainsong', () =>
+        {
+            music.setVolume(0.1);
         });
 
-        this.game.events.on('volumeup_mainsong', () => {
-            CandySong.setVolume(.5);
+        this.game.events.on('volumeup_mainsong', () =>
+        {
+            music.setVolume(0.5);
         });
     }
 
@@ -52,29 +61,40 @@ export class Intro extends Phaser.Scene {
             });
         }
 
-        //  TODO - Display 'introthanks' if they have plugin active
-        //  TODO - Check for plugin to be started and change text accordingly
+        const intro = this.add.image(x, 240, 'intro');
 
-        this.add.image(x, 240, 'intro');
+        webmonetization.once('start', () => {
+
+            intro.setTexture('introthanks');
+
+        });
+
+        webmonetization.start();
 
         const playButton = this.add.image(x, 380, 'playbutton');
 
         playButton.setInteractive({ cursor: 'pointer' });
 
-        playButton.on(Phaser.Input.Events.POINTER_OVER, () => {
+        playButton.on(Phaser.Input.Events.POINTER_OVER, () =>
+        {
             playButton.setTint(0x95d2d6);
         });
 
-        playButton.on(Phaser.Input.Events.POINTER_OUT, () => {
+        playButton.on(Phaser.Input.Events.POINTER_OUT, () =>
+        {
             playButton.clearTint();
         });
 
-        playButton.on(Phaser.Input.Events.POINTER_DOWN, () => {
-            if (this.change_scene) {
-                this.change_scene = false;
+        playButton.on(Phaser.Input.Events.POINTER_DOWN, () =>
+        {
+            if (this.changingScene)
+            {
+                this.changingScene = false;
+         
                 this.cameras.main.fadeOut(500, 0, 0, 0);
 
-                this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+                this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () =>
+                {
                     this.scene.start('Menu');
                 });
             }

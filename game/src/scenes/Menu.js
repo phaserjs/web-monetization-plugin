@@ -19,10 +19,10 @@ export class Menu extends Phaser.Scene {
 
         this.background = this.add.tileSprite(0, 0, 520, 700, 'backgroundstart').setOrigin(0);
 
-        this.tori1 = this.add.image(300, 320, 'tori1');
-        this.tori2 = this.add.image(300, 320, 'tori2').setAlpha(0);
+        this.tori1 = this.add.image(300, 300, 'tori1');
+        this.tori2 = this.add.image(300, 300, 'tori2').setAlpha(0);
 
-        this.logo = this.add.image(x, 80, '3candies').setScale(0);
+        this.logo = this.add.image(x, 60, '3candies').setScale(0);
 
         this.tweens.add({
             targets: this.logo,
@@ -43,21 +43,21 @@ export class Menu extends Phaser.Scene {
     buttons ()
     {
         const x = this.scale.width / 2;
+        const y = this.scale.height / 2;
 
         // click to start
         const text_start = this.add.dynamicBitmapText(
             x,
-            this.sys.game.config.height / 2 + 40,
+            y + 40,
             'pixel2Border',
             'CLICK TO START',
             22,
             1)
             .setOrigin(.5)
             .setTint(0xf1c40f)
-            .setDepth(100);
        
         this.tweens.add({
-            targets: [text_start],
+            targets: [ text_start ],
             alpha: 0,
             duration: 500,
             ease: (e) => Math.round(e),
@@ -68,13 +68,13 @@ export class Menu extends Phaser.Scene {
         // Select backgrounds
         const text_change_background = this.add.dynamicBitmapText(
             x,
-            this.sys.game.config.height - 150,
+            this.scale.height - 150,
             'pixel2',
             'CHOOSE BACKGROUND',
             8)
             .setOrigin(.5);
 
-        const normal_background_button = this.add.image(x - 45, this.sys.game.config.height - 100, 'normal_background-button-selected2')
+        const normal_background_button = this.add.image(x - 45, this.scale.height - 100, 'normal_background-button-selected2')
             .setInteractive({
                 'cursor': 'pointer'
             })
@@ -83,7 +83,7 @@ export class Menu extends Phaser.Scene {
             })
             .setName('background_buttons-normal');
 
-        const premium_background_button = this.add.image(x + 45, this.sys.game.config.height - 100, 'premium_background-button')
+        const premium_background_button = this.add.image(x + 45, this.scale.height - 100, 'premium_background-button')
             .setInteractive({
                 'cursor': 'pointer'
             })
