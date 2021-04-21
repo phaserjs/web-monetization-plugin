@@ -1,10 +1,12 @@
-# webmonetization-game
-Game example for GameWebMonetization
+# 3 Candies!
 
-## How to use?
+A complete example game created in Phaser 3 that demonstrates use of the Game Web Monetization Plugin.
+
+## How to Play?
+
 ```javascript
 > npm i
 ```
-To run use Live Server of Visual Studio Code or some server.
+To run use the Live Server built into Visual Studio Code, or another suitable local web server.
 
-![Screenshot](./screenshot.png)
+![Screenshot](/screenshots/menu.png)
