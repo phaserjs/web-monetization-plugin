@@ -10,23 +10,27 @@ twitter: photonstorm
 
 ### Coil
 
-Como hemos mencionado en el capítulo previo el usuario necesita un proveedor para que el pueda ingresar dinero y que este se reparta automáticamente por todas las páginas visitadas (quieres saber más sobre cómo se reparte el dinero: clica [aqí](https://help.coil.com/docs/general-info/intro-to-coil/index.html#how-is-coil-different-from-other-membership-services-like-patreon-and-flattr))j. Actualmente como proveedor podremos usar a Coil así que tendrás que registrarte en la página oficial y asignar tu payment pointer para poder probar que todo esté funcionando correctamente.
+Como hemos mencionado en el capítulo previo el usuario necesita un proveedor para que el pueda ingresar dinero y que este se reparta automáticamente por todas las páginas visitadas (quieres saber más sobre cómo se reparte el dinero: clica [aqí](https://help.coil.com/docs/general-info/intro-to-coil/index.html#how-is-coil-different-from-other-membership-services-like-patreon-and-flattr)). 
+
+Actualmente el proveedor principal es Coil así que tendrás que registrarte en la página oficial de Coil y asignar tu payment pointer para poder probar que tus juegos están habilitados para la monetización. Repasaremos las partes claves del proceso. 
 
 - Ve a la página oficial de Coil [aquí](https://coil.com/) y crea una cuenta clicando en **Sing up**
 
 ![Home Page](../img/part2/1-homepage.png)
 
-- Selecciona: Monetize Content (Sign up to monetize)
+- Selecciona:  _Monetize Content_ opción. Ahora tienes que seleccionar sign-up:
 
 ![Sign Up](../img/part2/2-signup_to_monetize.png)
 
-- Rellena tus datos correctamente
+- Rellena tus datos correctamente:
 
 ![Fill user data](../img/part2/3-fill_user_data.png)
 
-- Ve a tu correo e ingresa el código de verificación
+- Ve a tu correo, encuentra el código de verificación e ingresa el código:
 
 ![Verify Code](../img/part2/4-verify_code.png)
+
+Tu cuenta de Coil está lista para poderla usar. Lo que sigue ahora es crear una billetera/wallet dígital.
 
 ### Uphold
 
