@@ -1,9 +1,9 @@
 import { candy_grid, count_down, minimun_to_search, webmonetization } from '../global_vars.js';
 
+import { constructorConfeti as Confetis } from '../GameObjects/Confetis.js';
 import { GetName } from '../helpers/GetName.js';
 import { Lifes } from '../GameObjects/Lifes.js';
 import { RandomButtom } from '../GameObjects/RandomButtom.js';
-import { constructorConfeti as Confetis } from '../GameObjects/Confetis.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {
@@ -112,20 +112,9 @@ export class MainScene extends Phaser.Scene {
             .setScale(0)
             .setDepth(2001);
 
-        // GameOver overlay (box tap)
+        // GameOver overlay (box top)
         this.gameover_overlay = this.add.image(this.candies_box.x, -150, 'gameover')
             .setDepth(2000);
-
-        this.gameover_overlay_label = this.add.dynamicBitmapText(
-            (this.gameover_overlay.x + 10),
-            (this.gameover_overlay.y - 92),
-            'pixel2',
-            Phaser.Utils.String.Pad(0, 6, '0', 1),
-            16
-        )
-            .setTint(0x2f2f30)
-            .setDepth(2002)
-            .setOrigin(.5);
 
         this.play_button = this.add.image((this.gameover_overlay.x), (this.gameover_overlay.y + 73), 'playbutton')
             .setInteractive({ "cursor": "pointer" })
@@ -145,7 +134,7 @@ export class MainScene extends Phaser.Scene {
                 this.play_button.setData({ "change-scene": false });
                 // Remove cap
                 this.tweens.add({
-                    targets: [this.gameover_overlay, this.gameover_overlay_label, this.play_button],
+                    targets: [this.gameover_overlay, this.play_button],
                     delay: 500,
                     y: -200,
                     duration: 500,
@@ -361,12 +350,13 @@ export class MainScene extends Phaser.Scene {
         this.tadafx.on(Phaser.Sound.Events.COMPLETE, () => {
             this.game.events.emit('volumeup_mainsong');
         });
+
         // GameOver :(
         this.confetis.launch();
 
-        this.gameover_overlay_label.setText(
-            Phaser.Utils.String.Pad(this.points, 6, 0, 1)
-        );
+        this.random_buttom_label.setVisible(false);
+        this.random_buttom.setVisible(false);
+
         this.tweens.add({
             targets: [this.gameover_overlay_label],
             ease: Phaser.Math.Easing.Bounce.Out,
