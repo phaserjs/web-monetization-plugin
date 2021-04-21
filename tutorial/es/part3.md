@@ -8,15 +8,17 @@ twitter: photonstorm
 
 # Una descripción general del plugin
 
-Vamos a empezar a usar el plugin GameWebMonetization y a ver qué funciones están disponibles. 
+Vamos a empezar a usar el plugin Game Web Monetization y a ver qué funciones están disponibles. 
 
-Primero que todo recuerda que deberías tener tu payment pointer, si no lo tienes recuerda que lo has puesto en Coil así que lo podremos recuperar de acá.
+Primero que todo recuerda que deberías tener tu payment pointer, si no lo tienes recuerda que lo has puesto en Coil así que lo podremos recuperar de [acá](https://coil.com/).
 
 Ve a la web de Coil y luego en Settings busca Payouts y verás tu payment pointer.
 
+![PaymentPointer](../img/part3/1-paymentpointer.png)
 
-Ahora bien lo que haremos será generar una página simple de pruebas así que abre tu editor de código favorito (yo usaré Visual Studio Code), crea una carpeta en el escritorio (on donde quieras) y crea un index.html y un main.js, tal cual lo tengo en mi editor de código: 
+Ahora bien lo que haremos será generar una página simple de pruebas así que abre tu editor de código favorito (yo usaré [Visual Studio Code](https://code.visualstudio.com/)), crea una carpeta en el escritorio (on donde quieras) y crea un index.html y un main.js, tal cual lo tengo en mi editor de código: 
 
+![Base files](../img/part3/2-basefiles.png)
 
 Vamos a index.html y creamos su estructura básica llamando a main.js y definiéndolo como módulo para preparar todo, tal cual este modelo: 
 
@@ -36,26 +38,38 @@ Vamos a index.html y creamos su estructura básica llamando a main.js y definié
 </html>
 ```
 
-Ahora, bajaremos el plugin y lo pondremos en el proyecto, justo en la raíz del mismo.
+Ahora, bajaremos el plugin y lo pondremos en el proyecto (justo en la raíz).
+
+![Base](../img/part3/3-basefileswithplutin.png)
 
 Como ya tenemos puesto el tipo módulo ya podremos cargar nuestro plugin desde main.js, usaremos imports aunque también podrías usar la versión es5 y cargarlo por medio del tag script y tendría que funcionar igual.
 
-Vamos a main.js y le hacemos import a nuestro plugin arriba del todo: 
+Vamos a **main.js** y hacemos import a nuestro plugin:
 
+```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
+```
 
-Ahora en la siguiente línea para preparar el plugin hay que instanciarlo asignando una variable y colocando nuestro paymentPointer, te tiene que quedar así (recuerda poner tu paymentPointer): 
+Ahora en la siguiente línea para preparar el plugin hay que instanciarlo asignando una variable y colocando nuestro payment pointer, te tiene que quedar así (recuerda poner tu payment pointer): 
  
+```javascript
 const gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
 
+```
+
 Lo que hemos hecho hasta el momento es preparar el plugin, se ha instanciado y se ha asignado un payment pointer, ahora hay que iniciarlo. 
-Abrimos nuestro index.html en el navegador (yo usaré Visual Studio Code y la extensión Live Server).
+
+Abrimos nuestro **index.html** en el navegador (yo usaré **Visual Studio Code** y la extensión **Live Server**).
+
 Una vez abierto aún te tendrá que salir que el sitio no es monetizable y esto es debido a que hemos preparado el plugin pero no hemos iniciado la monetización.
 
-Volvamos a nuestro main.js y ahora iniciamos la monetización con el método start(), te tendría que quedar así: 
+![no monetizable coil plugin](../img/part3/4-nomonetizable.png)
 
+Volvamos a nuestro main.js y ahora iniciamos la monetización con el método start(), te tendría que quedar así:
+
+```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
  
 const gameWebMonetization = new GameWebMonetization({
@@ -63,9 +77,11 @@ const gameWebMonetization = new GameWebMonetization({
 });
  
 gameWebMonetization.start();
+```
 
 Ahora si volvemos a la web y actualizamos veremos que nuestro sitio empieza a monetizar: 
 
+![is monetizable](../img/part3/5-ismonetizable.png)
 
 Felicidades, ya solo con esa configuración puedes monetizar en todo momento pero también hay que darle alguna recompensa al usuario así que para eso tenemos diferentes métodos y propiedades que nos ayudarán a conocer el estado del plugin y vamos a ver algunas.
 
