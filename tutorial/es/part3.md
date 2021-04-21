@@ -12,11 +12,11 @@ Vamos a empezar a usar el plugin Game Web Monetization y a ver qué funciones es
 
 Primero que todo recuerda que deberías tener tu payment pointer, si no lo tienes recuerda que lo has puesto en Coil así que lo podremos recuperar de [acá](https://coil.com/).
 
-Ve a la web de Coil y luego en Settings busca Payouts y verás tu payment pointer.
+Ve a la web de Coil y luego en **Settings** busca **Payouts** y verás tu payment pointer.
 
 ![PaymentPointer](../img/part3/1-paymentpointer.png)
 
-Ahora bien lo que haremos será generar una página simple de pruebas así que abre tu editor de código favorito (yo usaré [Visual Studio Code](https://code.visualstudio.com/)), crea una carpeta en el escritorio (on donde quieras) y crea un index.html y un main.js, tal cual lo tengo en mi editor de código: 
+Ahora bien lo que haremos será generar una página simple de pruebas así que abre tu editor de código favorito (yo usaré [Visual Studio Code](https://code.visualstudio.com/)), crea una carpeta en el escritorio (on donde quieras) y crea un **index.html** y un **main.js**, tal cual lo tengo en mi editor de código: 
 
 ![Base files](../img/part3/2-basefiles.png)
 
@@ -38,7 +38,7 @@ Vamos a index.html y creamos su estructura básica llamando a main.js y definié
 </html>
 ```
 
-Ahora, bajaremos el plugin y lo pondremos en el proyecto (justo en la raíz).
+Ahora, bajaremos el plugin [aquí](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js) y lo pondremos en el proyecto (justo en la raíz).
 
 ![Base](../img/part3/3-basefileswithplutin.png)
 
@@ -124,7 +124,7 @@ property | details
 
 Si te fijas tenemos nuestro **paymentPointer** y un **requestId**.
 
-Necesitaremos este evento cuando queremos saber que se está monetizando el juego y poder mostrar algo de manera dinámica.
+Necesitaremos este evento cuando queremos saber que se está monetizando el juego y poder mostrar u ocultar algo de manera dinámica (como un mensaje).
  
 Ahora bien hay que tener cuidado porque cada vez que cambias de ventana del navegador la monetización se detiene y tendrás otra emisión del evento start.
 
@@ -193,10 +193,8 @@ Y en la consola podrás ver lo siguiente:
 
 ### Evento pending
 
-Ahora te estarás preguntando: ¿y para qué sirve pending?
-
-Pues este evento o estado emitido cuando el API de webmonetization se prepara para iniciar la monetization:
-copiaremos el evento start que tenemos en escucha y su console.log pero cambiando la palabra start por pending, tendrías que tener ahora este código: 
+Este evento o estado emitido cuando el API de webmonetization se prepara para iniciar la monetization.
+Copiaremos el evento start que tenemos en escucha y su console.log pero cambiando la palabra start por pending, tendrías que tener ahora este código: 
 
 
 ```javascript
@@ -218,8 +216,6 @@ gameWebMonetization.on(GameWebMonetization.PENDING, (event) => {
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
     console.log('[inside event start] - The state: ', gameWebMonetization.state);
 });
- 
-
 ```
 
 Ahora vamos al navegador y veremos lo siguiente:
@@ -254,7 +250,7 @@ property | details
 
 <br />
 
-Suena un poco raro, pero esto nos ayudará a conocer el progreso de la monetización en cada momento, este event se emite bastantes veces así que cuidado con él.
+Esto nos ayudará a conocer el progreso de la monetización en cada momento, este event se emite bastantes veces así que cuidado con él.
 
 Si te fijas lo más destacable sería ver el **assetCode** y **totalAmount**.
 
@@ -268,12 +264,12 @@ El **totalAmount** es la cantidad de ingresos que vamos obteniendo por un usuari
 Y por último también tenemos el evento stop, así que copia el evento start y cambia start por stop, te tendría que quedar así: 
 
 ```javascript
- 
 gameWebMonetization.on(GameWebMonetization.STOP, (event) => {
     console.log('[inside event stop] - The state: ', gameWebMonetization.state);
 });
 
 ```
+
 Una vez puesto el evento no se va a emitir hasta que llamemos el método stop(), ahora bien lo que haremos será llamar ese método pasado un tiempo.
 Usa **setTimeout** con cinco segundos y llama al método stop(), te tendría que quedar el siguiente código:
  
@@ -286,6 +282,7 @@ setTimeout(() => {
     gameWebMonetization.stop();
 }, 5000);
 ```
+
 Ahora bien, si vas a la consola podrás ver que se emite el evento progress y luego se detiene el plugin y emite el evento stop:
 
 ![Event Stop](../img/part3/11-stop_event.png)
@@ -319,7 +316,6 @@ const gameWebMonetization = new GameWebMonetization([
 ```
 
 Ahora si vamos al evento start y hacemos un console.log al receive podremos comprobar que si actualizamos muchas veces el navegador se irán cambiando los payment pointer y eso es debido al peso que hemos asignado: 
-
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
@@ -362,7 +358,7 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
 });
 ```
 
-Vamos al navegador actualizamos y miramos el nombre: 
+Vamos al navegador, actualizamos y miramos el nombre: 
 
 ![Pointer name 1](../img/part3/14-pointerName1.png)
 
