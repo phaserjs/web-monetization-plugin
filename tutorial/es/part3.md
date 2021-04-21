@@ -85,14 +85,16 @@ Ahora si volvemos a la web y actualizamos veremos que nuestro sitio empieza a mo
 
 Felicidades, ya solo con esa configuración puedes monetizar en todo momento pero también hay que darle alguna recompensa al usuario así que para eso tenemos diferentes métodos y propiedades que nos ayudarán a conocer el estado del plugin y vamos a ver algunas.
 
-Métodos, eventos y propiedades
+## Métodos, eventos y propiedades
 
-El plugin tiene diferentes eventos como son: start, stop, pending y progress.
+El plugin tiene diferentes eventos como son: **start**, **stop**, **pending** y **progress**.
 
-Evento start.
+<br />
+
+### Evento start.
 
 Este evento es emitido cuando la API de monetización ha iniciado correctamente y se empieza a monetizar. 
-Para usarlo simplemente ponemos en escucha el evento usando el método de escucha .on() y asignando el evento a escuchar GameWebMnetizationo.START, pon lo siguiente justo debajo de .start().
+Para usarlo simplemente ponemos en escucha el evento usando el método de escucha **.on()** y asignando el evento a escuchar **GameWebMnetizationo.START**, pon lo siguiente justo debajo del método **.start()** antes creado.
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
@@ -111,38 +113,61 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
 
 Como resultado en consola deberíamos tener algo así: 
 
-Si te fijas tenemos nuestro paymentPointer y un requestId que es solo un id único, ni más ni menos. Ahora bien esto no es lo importante de este evento, necesitamos este evento para cuando queremos saber que se está monetizando el juego y poder mostrar algo de manera dinámica.
-Así que ya sabes, usa este evento para saber cuando se inicia la monetización. 
+![Result of Event Start](../img/part3/6-resulteventstart.png)
+
+property | details
+--- | ---
+`paymentPointer` | Tu payment pointer. Es el mismo valor que has usado en la configuración.
+`requestId` | Este valor es un ID de dessión o ID de monetización (UUID v4) generado por el agente de usuario.
+
+<br />
+
+Si te fijas tenemos nuestro **paymentPointer** y un **requestId**.
+
+Necesitaremos este evento cuando queremos saber que se está monetizando el juego y poder mostrar algo de manera dinámica.
+ 
 Ahora bien hay que tener cuidado porque cada vez que cambias de ventana del navegador la monetización se detiene y tendrás otra emisión del evento start.
 
-Propiedad isMonetized.
+Así que ya sabes, usa este evento para saber cuando se inicia la monetización.
 
-En el transcurso de tu juego a lo mejor solo te interesa conocer si se está monetizando o no de manera no tan dinámica y saber esto solo cuando se inicie una escena o cierta partida así que para eso tenemos la propiedad .isMonetized que es independiente del evento y que solo nos devuelve un booleano que solo conoceremos en qué estado está cuando esta propiedad es llamada.
+<br />
 
-Ahora le haremos un console.log antes de iniciar la monetización y luego otro console.log dentro del evento para ver sus cambios, pon el siguiente código: 
+### Propiedad isMonetized.
+
+En el transcurso de tu juego a lo mejor solo te interesa conocer si se está monetizando o no de manera no tan dinámica y saber esto solo cuando se inicie una escena o cierta partida así que para eso tenemos la propiedad **.isMonetized** que es independiente del evento y que solo nos devuelve un booleano que solo conoceremos en qué estado está cuando esta propiedad es llamada.
+
+Ahora le haremos un **console.log** antes de iniciar la monetización y luego otro **console.log** dentro del evento para ver sus cambios, pon el siguiente código: 
 
 ```javascript
 var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
 
+// New code:
 console.log('Is monetized? ', gameWebMonetization.isMonetized);
 
 gameWebMonetization.start();
 
-gameWebMonetization.on(GameWebMonetization.START, (receive) => {
-    // Here your code
+// New code:
+gameWebMonetization.on(GameWebMonetization.START, (event) => {
     console.log('[inside event start] - Is monetized? ', gameWebMonetization.isMonetized);
 });
 ```
-Ahora si vamos a la consola del navegador podremos observar que antes de que se inicie la monetización y se genere el evento tendremos un false y luego true (true es cuando se está monetizando).
 
+Ahora si vamos a la consola del navegador podremos observar que antes de que se inicie la monetización y se genere el evento tendremos un **false** y luego **true** (true es cuando se está monetizando).
 
+![isMonetized result](../img/part3/7-ismonetized_result.png)
 
 Ahora bien, llama a .isMonetized en cualquier parte de tu juego en donde quieras comprobar el estado en ese momento y dar algún premio o beneficio al usuario.
 
-Estado actual del plugin
-El plugin pasa por distintos estados que son los mismos estados como lo son: started, stopped o pending.
+<br />
+
+### Conocer el estado actual del plugin
+
+El plugin pasa por distintos estados a saber: **started**, **stopped** o **pending**.
+
+//TODO: Continue HERE
+
 Para saber el estado basta con llamar a la propiedad .state, hagamos lo mismo que hicimos con isMonetized pero cambiandolo por state, te tendría que quedar el siguiente código: 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
