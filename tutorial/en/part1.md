@@ -38,4 +38,4 @@ Web Monetization is not intended to replace _all_ of the ways your games can mak
 
 We strongly suggest you familiarize yourself with the core concepts by reading over the [Coil provider page](https://coil.com/) and the [Web Monetization page](https://webmonetization.org/). 
 
-Then let's get started implementing the Game Web Monetization Plugin in Part 2.
+Then let's get started setting up our payment provider in Part 2.
