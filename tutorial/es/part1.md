@@ -10,7 +10,6 @@ twitter: photonstorm
 
 ![Logo Web Monetization](../img/part1/logo-web-monetization.svg)
 
-
 En esencia, la monetización web es una JavaScript browser API que permite a los desarrolladores de juegos monetizar sus juegos mediante la creación de un flujo de pago constante. Mientras los jugadores juegan, los micropagos se envían a su billetera/wallet. También se propone como un estándar W3C. El objetivo es resolver un problema común:
 
 "La capacidad de transferir dinero ha sido una omisión de la plataforma web desde hace mucho tiempo. Como resultado, la web sufre una avalancha de publicidad y modelos comerciales corruptos. La monetización web proporciona una forma abierta, nativa, eficiente y automática de compensar creadores.
@@ -38,4 +37,4 @@ Cada desarrollador puede decidir que beneficios dar al usuario, como por ejemplo
 
 Recomendamos encarecidamente que empieces a familiarizarte con los concepto principales leyendo la [página de Coil provider](https://coil.com/) y la página de [Web Monetization](https://webmonetization.org/).
 
-Entonces, comencemos a implementar el plugin de Game Web Monetization en la Parte 2.
+Bien, entonces comencemos a configurar nuestro proveedor de pagos en la Parte 2.
