@@ -34,38 +34,39 @@ Tu cuenta de Coil está lista para poderla usar. Lo que sigue ahora es crear una
 
 ### Uphold
 
-Una vez ingresado el código ahora necesitamos crear nuestra cartera/wallet para recibir los pagos, la elección acá es tuya pero nos resultó más sencillo usar Uphold y la validación del usuario es más fácil y rápida, además que tiene muchas monedas disponibles, así que ahora hay que crear una cuenta en uphold pero antes recuerda lo siguiente: Coil es usado para distribuir el dinero que ingrese el usuario pero como desarrollador te interesa saber que todo esté funcionando así que haremos pruebas de monetización pero lo más importante como desarrollador es generar tu cartera y obtener el payment pointer, así que con Uphold ya sería suficiente.
+Ahora necesitamos crear nuestra billetera/wallet para recibir los pagos. Para este proceso nosotros usaremos el servicio Uphold. Hay otros servicios disponibles pero nosotros veremos como hacerlo con Uphold porque para nosotros el proceso a la hora de verificar un usuario es sencillo, además de que actualmente cuenta con muchas monedas disponibles (al menos en el momento que se escribió esta sección). Si ya tienes una billetera/wallet con tu payment pointer puedes omitir esta sección.
+
+Es útil comprender la relación entre Coil y Uphold, o servicios similares. Coil se usa para _distribuir_ los micropagos y Uphold se usa para recibirlos. Uphold generará los payment pointers de pago necesarios para habilitar la monetización web de su juego.
 
 ![Uphold configuration](../img/part2/5-coil_uphold_configuration.png)
 
-Selecciona Uphold y luego clica en donde dice [Get a payment pointer](https://help.coil.com/docs/monetize/wallets/uphold/index.html) Coil nos mostrará un tutorial bastante bueno de como obtener ese payment pointer que es lo más importante para poder monetizar tu contenido ya que gracias a ese payment pointer podrás recibir el dinero.
+Selecciona Uphold y luego clica en donde dice [Get a payment pointer](https://help.coil.com/docs/monetize/wallets/uphold/index.html)
 
-A este punto y después de haber creado tu cuenta en Uphold ya deberías tener tu payment pointer y solo queda ponerlo en la configuración de tu cuenta de Coil y clica en: Finish.
+Coil nos mostrará un tutorial bastante bueno de como obtener ese payment pointer desde Uphold, que es lo más importante para poder monetizar tu juego.
+
+A este punto y después de haber creado tu cuenta en Uphold ya deberías tener tu payment pointer. Solo queda ponerlo en la configuración de tu cuenta de Coil y clica en "Finish".
 
 ![PaymentPointer configuration in Coil](../img/part2/6-paymentpointer_config.png)
 
-Una vez realizado eso ya nos redirige al home.
+Una vez realizado eso ya nos redirige al home:
 
 ![Homepage done](../img/part2/7-homepage_done.png)
 
 ### Extensión de Coil
 
-Llegó la hora de instalar la extensión de Coil para que podamos hacer las pruebas correctamente.
+Es posible que a este punto ya hayas instalado la extensión de Coil, pero si no lo has hecho, es hora de instalar la extensión en el navegador para probar si la monetización funciona correctamente en nuestros juegos.
 
-Clica en donde dice Home o accede a [https://coil.com](https://coil.com) y baja hasta encontrar **Install the Coil Extension**  or **The Puma Browser** app.
+Accede a [https://coil.com](https://coil.com) y baja hasta encontrar la sección **The Coil Extension and Puma Browser**.
 
 ![Coil extensión](../img/part2/8-coil_extension.png)
 
-Una vez instalada la extensión podemos probar si todo está funcionando.
-Podrás ver la extensión en tu barra de extensiones de tu navegador: 
+La extensión está disponible actualmente para Chrome, Samsung Internet, Firefox, Microsoft Edge y Brave Browser. Elija la extensión para el navegador que está utilizando. Alternativamente, puede instalar el navegador Puma, pero para esta serie de tutoriales asumiremos que está usando una extensión.
+
+Una vez instalada la extensión podemos probar si todo está funcionando. Debería poder ver el icono de la extensión en la barra de herramientas de su navegador:
 
 ![Extension in browser](../img/part2/8-extension_toolbar.png)
 
-Es probable que necesites convertirte en miembro y pagar 5 dólares la primera vez para realizar estas pruebas.
-
-A este punto si estás en la página oficial de phaser: (https://phaser.io) y clicas el icono de la extensión de Coil podrás ver lo siguiente.
-
-Si eres miembro:
+Deberás adquirir una membresía de Coil para poder realizar estas pruebas, una vez realizada la membresía puedes ir a la página [oficial de Phaser](https://phaser.io). Si haces click en el icono de la extensión de Coil podrás ver el siguiente mensaje si eres miembro:
 
 ![Extension Coil is playing](../img/part2/9-coil_is_playing.png)
 
