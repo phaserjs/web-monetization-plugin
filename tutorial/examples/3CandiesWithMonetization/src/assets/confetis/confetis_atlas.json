@@ -1,0 +1,320 @@
+{
+    "frames": [
+        {
+            "filename": "papel-amarillo_0",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-amarillo_1",
+            "frame": {
+                "x": 11,
+                "y": 1,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-amarillo_2",
+            "frame": {
+                "x": 21,
+                "y": 1,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-amarillo_3",
+            "frame": {
+                "x": 31,
+                "y": 1,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-azul_0",
+            "frame": {
+                "x": 1,
+                "y": 11,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-azul_1",
+            "frame": {
+                "x": 11,
+                "y": 11,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-azul_2",
+            "frame": {
+                "x": 21,
+                "y": 11,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-azul_3",
+            "frame": {
+                "x": 31,
+                "y": 11,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-morado_0",
+            "frame": {
+                "x": 1,
+                "y": 21,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-morado_1",
+            "frame": {
+                "x": 11,
+                "y": 21,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-morado_2",
+            "frame": {
+                "x": 21,
+                "y": 21,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-morado_3",
+            "frame": {
+                "x": 31,
+                "y": 21,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-naranja_0",
+            "frame": {
+                "x": 1,
+                "y": 31,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-naranja_1",
+            "frame": {
+                "x": 11,
+                "y": 31,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-naranja_2",
+            "frame": {
+                "x": 21,
+                "y": 31,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-naranja_3",
+            "frame": {
+                "x": 31,
+                "y": 31,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-rojo_0",
+            "frame": {
+                "x": 1,
+                "y": 41,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-rojo_1",
+            "frame": {
+                "x": 11,
+                "y": 41,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-rojo_2",
+            "frame": {
+                "x": 21,
+                "y": 41,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-rojo_3",
+            "frame": {
+                "x": 31,
+                "y": 41,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-verde_0",
+            "frame": {
+                "x": 1,
+                "y": 51,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-verde_1",
+            "frame": {
+                "x": 11,
+                "y": 51,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-verde_2",
+            "frame": {
+                "x": 21,
+                "y": 51,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "papel-verde_3",
+            "frame": {
+                "x": 31,
+                "y": 51,
+                "w": 8,
+                "h": 8
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Phaser3",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}
