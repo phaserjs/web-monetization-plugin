@@ -83,7 +83,7 @@ Now, if we go back to the browser and refresh we will see that our site begins t
 
 ![Monetizable](../img/part3/5-ismonetizable.png)
 
-**Congratulations!** This page is now streaming tiny amounts of currency into your digital wallet. If something went wrong remember to check:
+**Congratulations!** This page is now streaming tiny amounts of currency into your digital wallet via the Interledger protocol. If something went wrong remember to check:
 
 1. That you have a Coil account with a subscription.
 2. That you have fully verified your Uphold (or other wallet) service
@@ -285,21 +285,37 @@ property | details
 `assetCode` | The code (typically three characters) identifying the amount's unit. A unit, for example, could be a currency (USD, XRP). 
 `assetScale` | The number of places past the decimal for the amount. For example, if you have USD with an asset scale of two, then the minimum divisible unit is cents.
 `receipt` | base64-encoded STREAM receipt issued by the Web Monetization receiver to the Web Monetization provider as proof of the total amount received in the stream.
-`totalAmount` | the sum of what has been received with the current paymentPointer, if the paymentPointer is changed this amount will be reset
+`totalAmount` | the sum of what has been received with the current paymentPointer, if the paymentPointer is changed this amount will be reset.
 
 As you can see, that's a lot of handy data!
 
-Perhaps the most interesting properties are `assetCode` and `totalAmount`. The `assetCode` is the type of currency we are receiving, in this case it is the XRP cryptocurrency. Don't worry, your wallet will convert the coins automatically to your chosen currency.
+Perhaps the most interesting properties are `assetCode` and `totalAmount`. The `assetCode` is the type of currency we are receiving, in this case it is the XRP cryptocurrency. Don't worry, the Interledger protocol will convert this automatically into your chosen currency.
 
 The `totalAmount` is the amount of income that we have obtained so far from the player during _this play session_. This counter is reset if the page containing your game is refreshed. It doesn't persist longer than a single play session.
 
 As its name implies, the `PROGRESS` event helps you keep track of the monetization process at all times. Because the stream of payments to your wallet is constant this event is fired many times. During testing we saw it fired _every 2 seconds_ that the game was running, but the actual frequency may be higher or lower than this. So be careful with what your game does as a result of this event!
 
-Rather than hooking this event to say an in-game animation, you may be better off aggregating the information within it, then using that from your own timed in-game events. As you may expect, the plugin can do some of this for you, which we'll cover in a moment :)
+Rather than hooking this event to say an in-game animation, you may be better off aggregating the information within it, then using that from your own timed in-game events.
+
+### The `total` property
+
+As we saw, the `PROGRESS` event gives us lots of handy data. The plugin offers you a `total` property that keeps track of the total amount of payments a player has streamed to your wallet during their play session.
+
+This value persists even if they tab out to another application and then come back to your game.
+
+You can access the `total` at any point via the plugin instance:
+
+```javascript
+const currentTotal = gameWebMonetization.total;
+```
+
+The currency of the `total` is set by the Web Monetization API and the Interledger protocol (typically USD or XRP), not by your wallet. This actual currency can be obtained from the `assetCode` property sent by the `PROGRESS` event.
+
+The currency is automatically converted by the protocol to your wallets currency before being received. However, it's important to remember that if you've got say a DOGE Coin Payment Pointer, the `total` value isn't the amount of DOGE received, but an intermediary currency, likely XRP.
 
 ### The STOP Event
 
-Finally, we have the `STOP` event. This event is emitted when the API enters a stopped state. This could be from you calling the plugins `stop` method, or by the user stopping the payment via their browser.
+Finally, we have the `STOP` event. This event is emitted when the API enters a stopped state. This could be from you calling the plugins `stop` method, or by the user stopping the payment via their browser by performing an action such as switching to another browser tab or window.
 
 You listen for it in the same way as the other events. Let's modify our `main.js` to handle this:
 
@@ -309,10 +325,13 @@ gameWebMonetization.on(GameWebMonetization.STOP, (event) => {
 });
 ```
 
+Once the event handler is created it will be emitted if we call the `stop` method, or switch to another browser tab.
 
+Try running the above and then swapping in and out of the tab a few times. You should see a `STOP` event for each time you do this:
 
-Once the event is set, it will not be emitted until we call the **stop()** method, now what we will do is call that method after a while.
-Use **setTimeout** with five seconds and call the **stop()** method, you should have the following code:
+![Stop Event](../img/part3/11-stop_event.png)
+
+Alternatively, we could fake this action by using `setTimeout` to call the `stop` method for us, like in the following code:
  
 ```javascript
 gameWebMonetization.on(GameWebMonetization.STOP, (receive) => {
@@ -324,107 +343,24 @@ setTimeout(() => {
 }, 5000);
 ```
 
-Now, if you go to the console you will see that the progress event is emitted and then the plugin stops and emits the stop event:
+Now, if you go to the console you will see that the progress event is emitted and then the plugin stops after 5 seconds.
 
-![Event Stop](../img/part3/11-stop_event.png)
+You can use the `STOP` event to know when monetization has stopped. Just remember that it's entirely possible it will start again, i.e. if they swapped tab or application.
 
-You can use the stop event to know when your game stops, but remember that this event will also be emitted when you change windows since the monetization will stop.
+### Change the Payment Pointer
 
-<br />
+If you need to change the Payment Pointer your game is using, you can call the `changePaymentPointer` method.
 
-## Divide the income
-
-With the plugin it is possible to divide the income for this we use probabilistic income distribution, we recommend that you see this link for more details [here](https://webmonetization.org/docs/probabilistic-rev-sharing).
-
-When a user accesses your game the plugin is able to select a paymentPointer depending on a weight that we assign, the global weight it is not must exceed 100% and you can decide how to distribute that weight, if you want you can, for example, put a collaborator a weight of 40 and you get 60 and thus you have a better chance that your paymentPointer will come out 60% more than that of your partner who overall will only come out 40%.
-
-Once you have configured the multiple paymentPointer the plugin will internally select one randomly (but taking into account the weight) and it will continue to work the same as it has been taught in this tutorial.
-
-To configure multiple payment points you can do it by modifying the configuration when we instantiate the plugin, we will add an array with multiple payment pointer, as is the code:
-
-```javascript
-const gameWebMonetization = new GameWebMonetization([
-    {
-        paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
-        weight: 60
-    },
-    {
-        paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
-        weight: 40
-    }
-]);
-
-```
-
-Now if we go to the start event and do a console.log when we receive, we can verify that if we update the browser many times, the payment pointer will change and that is due to the weight we have assigned:
-
-```javascript
-gameWebMonetization.on(GameWebMonetization.START, (event) => {
-    console.log('[inside event start] - The state: ', event);
-});
-```
-
-When updating many times you will see that the payment pointer is changed:
-
-![multiples payment pointer 1](../img/part3/12-multiples_payment_pointer_1.png)
-
-![multiples payment pointer 2](../img/part3/13-multiples_payment_pointer_2.png)
-
-<br />
-
-If it is a bit difficult to know who owns each payment pointer, we can optionally pass the pointerName property in the configuration like this:
-
-```javascript
-const gameWebMonetization = new GameWebMonetization([
-    {
-        paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
-        weight: 60,
-        pointerName: "Bob"
-    },
-    {
-        paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
-        weight: 40,
-        pointerName: "Alice"
-    }
-]);
-
-```
-
-To know the name we simply access the pointerName property, we will do it within the start event (for example) in this way:
-
-```javascript
-gameWebMonetization.on(GameWebMonetization.START, (event) => {
-    console.log('[inside event start] - The state: ', gameWebMonetization.pointerName);
-});
-```
-
-We go to the browser, refresh it and look at the name:
-
-![Pointer name 1](../img/part3/14-pointerName1.png)
-
-And if you update several times you will see that the name is changed:
-
-![Pointer name 2](../img/part3/15-pointerName_2.png)
-
-<br />
-
-### Change the paymentPointer
-
-To change the paymentPointer we have a method called **.changePaymentPointer()**.
-
-To use it you can simply call it without any problems and assign the new paymentPointer like this:
+Simply call the method and pass it a new configuration object:
 
 ```javascript
 gameWebMonetization.changePaymentPointer({
     paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
-    weight: 40,
     pointerName: "Alice"
 });
-
+gameWebMonetization.restart();
 ```
 
-Remember that the method is part of the **GameWebMonetization** instance and is not a static method.
+Calling `changePaymentPointer()` only prepares the plugin for the change, but doesn't make it. For that, you need to call the `restart()` method, as in the example code above.
 
-Now, **changePaymentPointer()** only prepares the change but does not make it, for the change to be effective you will have to stop the monetization with **.stop()** and then resume it with **.start()**.
-
-Well, you already have everything you need to monetize your games, see you in the next tutorial.
+Payment Pointers can also be provided as a weighted array. This allows you to take advantage of probabilistic revenue sharing, which we'll cover in the next part of the tutorial.
