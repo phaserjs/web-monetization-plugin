@@ -1,4 +1,4 @@
-import { candy_grid, count_down, minimun_to_search, webmonetization } from '../global_vars.js';
+import { candy_grid, count_down, minimun_to_search, gamewebmonetization } from '../global_vars.js';
 
 import { constructorConfeti as Confetis } from '../GameObjects/Confetis.js';
 import { GetName } from '../helpers/GetName.js';
@@ -48,24 +48,24 @@ export class MainScene extends Phaser.Scene {
         // Confetis
         this.confetis = new Confetis(this);
 
-        webmonetization.on('stop', () => {
+        gamewebmonetization.on('stop', () => {
             // this.scene.stop('BackgroundScene');
             // this.scene.stop('Menu');
             // this.scene.stop();
             // this.scene.start('Intro');
-            webmonetization.removeListener('stop');
-            webmonetization.removeListener('start');
+            gamewebmonetization.removeListener('stop');
+            gamewebmonetization.removeListener('start');
             this.sound.stopAll();
         });
 
-        webmonetization.on('start', () => {
+        gamewebmonetization.on('start', () => {
             this.lifes.addLifes(true);
         });
     }
 
     create() {
         // Lifes
-        this.lifes = new Lifes(this, webmonetization.isMonetized);
+        this.lifes = new Lifes(this, gamewebmonetization.isMonetized);
 
         // Candies box container
         this.candies_box = this.add.image(this.scale.width / 2, this.scale.height / 2, 'candy-container-0');

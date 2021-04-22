@@ -1,4 +1,4 @@
-import { backgrounds, candies, lifes_sprites, webmonetization } from "./global_vars.js";
+import { backgrounds, candies, lifes_sprites } from "./global_vars.js";
 
 export class Bootloader extends Phaser.Scene
 {

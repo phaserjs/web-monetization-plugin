@@ -1,4 +1,4 @@
-import { background_selected, webmonetization } from "../global_vars.js";
+import { background_selected, gamewebmonetization } from "../global_vars.js";
 
 export class Menu extends Phaser.Scene {
     constructor() {
@@ -89,10 +89,10 @@ export class Menu extends Phaser.Scene {
             })
             .setData({
                 'active': false,
-                'plugin-active': webmonetization.isMonetized
+                'plugin_active': gamewebmonetization.isMonetized
             })
             .setAlpha(
-                webmonetization.isMonetized ? 1 : .6
+                gamewebmonetization.isMonetized ? 1 : .6
             )
             .setName('background_buttons-premium');
 
@@ -135,7 +135,7 @@ export class Menu extends Phaser.Scene {
                         premium_background_button.setData({'active': false});
                     }
                     if (gameobject.name.endsWith('premium')) {
-                        if(gameobject.getData('plugin-active')) {
+                        if(gameobject.getData('plugin_active')) {
                             this.popfx.play();
                             background_selected.active = "premium";
                             gameobject.setData({'active': true});

@@ -1,0 +1,15 @@
+{
+    "image": "fontBorders",
+    "width": 20,
+    "height": 20,
+    "chars": "0123456789 ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚáéíóú:-_=$€()",
+    "offset": {
+        "x": 0,
+        "y": 0
+    },
+    "spacing": {
+        "x": 0,
+        "y": 0
+    },
+    "charsPerRow": 13
+}

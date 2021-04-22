@@ -1,16 +1,16 @@
 import { CONFIG } from './config.js';
-import { webmonetization } from './global_vars.js';
+import { gamewebmonetization } from './global_vars.js';
 
 const stopbutton = document.querySelector('#stop');
 
 stopbutton.addEventListener('click', () => {
-    webmonetization.stop();
+    gamewebmonetization.stop();
 });
 
 const startbutton = document.querySelector('#start');
 
 startbutton.addEventListener('click', () => {
-    webmonetization.start();
+    gamewebmonetization.start();
 });
 
 const game = new Phaser.Game(CONFIG);

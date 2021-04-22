@@ -1,4 +1,4 @@
-import { webmonetization } from "../global_vars.js";
+import { gamewebmonetization } from "../global_vars.js";
 
 export class Intro extends Phaser.Scene
 {
@@ -63,13 +63,13 @@ export class Intro extends Phaser.Scene
 
         const intro = this.add.image(x, 240, 'intro');
 
-        webmonetization.once('start', () => {
+        gamewebmonetization.once('start', () => {
 
             intro.setTexture('introthanks');
 
         });
 
-        webmonetization.start();
+        gamewebmonetization.start();
 
         const playButton = this.add.image(x, 380, 'playbutton');
 

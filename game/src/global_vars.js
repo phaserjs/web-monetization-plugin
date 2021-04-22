@@ -1,7 +1,7 @@
 import { CandyGrid } from "./GameObjects/CandyGrid.js";
-import { GameWebMonetization } from "../../plugin/dist/GameWebMonetization.js";
+import { GameWebMonetization } from "./plugins/GameWebMonetization/GameWebMonetization.js";
 
-export const webmonetization = new GameWebMonetization({
+export const gamewebmonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
     pointerName: 'Richard'
 });

@@ -1,16 +1,16 @@
 import { GameWebMonetization } from './GameWebMonetization.js';
 
 const gameWebMonetization = new GameWebMonetization({
-    paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii',
+    paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
     weight: 60,
     pointerName: "Bob"
 });
 
-gameWebMonetization.changePaymentPointer({
-    paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
-    weight: 40,
-    pointerName: "Alice"
-});
+// gameWebMonetization.changePaymentPointer({
+//     paymentPointer: '$ilp.uphold.com/ziW6E7iwKUkp',
+//     weight: 40,
+//     pointerName: "Alice"
+// });
 
 console.log('The state: ', gameWebMonetization.state);
 
