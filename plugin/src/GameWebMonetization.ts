@@ -204,13 +204,18 @@ export class GameWebMonetization extends EventEmitter
     }
 
     /**
-     * Stops the Web Monetization process, removing the `meta` tags from the document head.
+     * Stops the Web Monetization process, removing the `meta` tags from the document head
+     * and removing the event listeners.
      * 
      * @returns The GameWebMonetization instance.
      */
     stop (): this
     {
-        this.removeMeta();
+        if (document && document.monetization)
+        {
+            this.removeEvents();
+            this.removeMeta();
+        }
 
         return this;
     }
@@ -380,7 +385,6 @@ export class GameWebMonetization extends EventEmitter
             this.isMonetized = false;
 
             this.emit(GameWebMonetization.STOP, event.detail);
-            this.removeEvents();
         }
     }
 

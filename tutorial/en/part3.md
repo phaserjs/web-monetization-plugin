@@ -8,19 +8,19 @@ twitter: photonstorm
 
 # An overview of the plugin
 
-Let's get started using the Game Web Monetization plugin and see what features are available.
+Let's get started implementing the Game Web Monetization plugin and see what features are available.
 
-First of all remember that you should have your payment pointer, if you don't have it remember that you have put it in Coil so we can retrieve it from [here](https://coil.com/).
+Before we can start you should have already signed-up with Coil and a digital wallet service provider like Uphold. If you've not done this yet, please return to [Part 2](part2) and do so, as everything from this point on relies on it.
 
-Go to the Coil website and then in **Settings** look for **Payouts** and you will see your payment pointer.
+Login to the [Coil website](https://coil.com) and then in **Settings** look for **Payouts** and you will see your Payment Pointer:
 
 ![PaymentPointer](../img/part3/1-paymentpointer.png)
 
-Now what we will do is generate a simple test page so open your favorite code editor (I will use [Visual Studio Code](https://code.visualstudio.com/)), create a folder on the desktop (on wherever you want) and create an **index.html** and a **main.js**, as I have it in my code editor:
+To check it's working, lets create a simple test page. Open your favorite editor (for this tutorial we'll use VS Code), create a new folder and inside of that save empty `index.html` and `main.js` files.
 
 ![Base files](../img/part3/2-basefiles.png)
 
-Let's go to index.html and create its basic structure by calling **main.js** and defining it as a module to prepare everything, just like this model:
+We'll edit `index.html` first and create its basic structure by calling `main.js` and defining it as a module:
 
 ```html
 <!DOCTYPE html>
@@ -32,42 +32,42 @@ Let's go to index.html and create its basic structure by calling **main.js** and
     <title>Game Web Monetization</title>
 </head>
 <body>
-    
     <script src="./main.js" type="module"></script>
 </body>
 </html>
 ```
 
-Now, we will download the plugin from [here](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js) and put it in the project (right at the root).
+Now it's time to [download the Game Web Monetization plugin](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js) - save this file alongside the index and main files you've already got:
 
 ![Base](../img/part3/3-basefileswithplutin.png)
 
-As we already have the module type set, we will be able to load our plugin from main.js, we will use imports although you could also use the es5 version and load it through the script tag and it should work the same.
+This version of the plugin exposes itself as an ESM (ES Module), so we can load it directly in `main.js`. For this tutorial we're going to use imports and modern JavaScript. However, you can also find ES5 and TypeScript versions of the plugin in the GitHub repository, should you require them. For the rest of this tutorial, though, we'll assume you're using the ESM.
 
-Let's go to **main.js** and import our plugin:
+Let's edit `main.js` to import our plugin:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
 ```
 
-Now in the next line to prepare the plugin you have to instantiate it by assigning it a variable and placing our payment pointer, it should look like this (remember to put your payment pointer):
+With the module imported we can instantiate the plugin. The constructor requires a configuration object that contains a `paymentPointer`. This is why it's important you've already obtained one from your wallet service.
+
+Add the following to `main.js` and remember to replace the `paymentPointer` value below with your own:
 
 ```javascript
 const gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
-
 ```
 
-What we have done so far is to prepare the plugin, it has been instantiated and a payment pointer has been assigned, now we have to start it.
+What we've done is import the module, create an instance of the plugin and assign a Payment Pointer to it. Now, we just have to start it.
 
-We open our **index.html** in the browser (I'll use **Visual Studio Code** and the **Live Server** extension).
+Open `index.html` in a browser. For this tutorial we're using [Visual Studio Code](https://code.visualstudio.com/) with the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, but you can use any method, so long as the file is being served to your browser and not just opened directly.
 
-Once opened, it will still have to appear that the site is not monetizable and this is because we have prepared the plugin but have not started monetization.
+Once open, it will still appear that the site is not monetizable. This is because we have prepared the plugin but have not _started_ monetization:
 
-![no monetizable coil plugin](../img/part3/4-nomonetizable.png)
+![No monetizable coil plugin](../img/part3/4-nomonetizable.png)
 
-Let's go back to our **main.js** and now we can start the monetization with the **start()** method, it should look like this:
+Let's go back and edit `main.js` to start the monetization process. This is done with the `start()` method:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
@@ -79,65 +79,88 @@ const gameWebMonetization = new GameWebMonetization({
 gameWebMonetization.start();
 ```
 
-Now if we go back to the web and update we will see that our site begins to monetize:
+Now, if we go back to the browser and refresh we will see that our site begins to monetize itself:
 
-![is monetizable](../img/part3/5-ismonetizable.png)
+![Monetizable](../img/part3/5-ismonetizable.png)
 
-Congratulations, only with that configuration you can monetize at all times but you also have to give some reward to the user so for that we have different methods and properties that will help us to know the status of the plugin and we are going to see some.
+**Congratulations!** This page is now streaming tiny amounts of currency into your digital wallet. If something went wrong remember to check:
 
-## Methods, properties and events
+1. That you have a Coil account with a subscription.
+2. That you have fully verified your Uphold (or other wallet) service
+3. That the Payment Pointer URL has been changed in the code to your own.
+4. That you are serving the test page, not opening it directly in a browser.
 
-The plugin has different events such as: **start**, **stop**, **pending** and **progress**.
+With only this configuration you have already successfully monetized this page. However, it's important to at least give some reward to the players of your game. To do this you can take advantage of the methods and properties that the plugin offers. Let's dive into those now.
 
-<br />
+## Methods, Properties and Events of the Plugin
 
-### The start event.
+The plugin will emit four key events:
 
-The event is emitted when Web Monetization API is sucessfully started.
+1. `start`
+2. `stop`
+3. `pending`
+4. `progress`
 
-To use it, we simply put the event on listening using the **.on()** listener method and assigning the event to listen **GameWebMnetizationo.START**, put the following just below the **.start()** method before created.
+You can listen for each of these from your game code because the Game Web Monetization Plugin is an Event Emitter. This means you can use the following methods directly on the plugin:
 
-```javascript
+```js
+once('event-name', eventHandler, context);
+on('event-name', eventHandler, context);
+off('event-name', eventHandler, context);
+```
+
+If you prefer to be more verbose, you can use `addListener` instead of `on` and `removeListener` instead of `off`. We will use the short version in the following code.
+
+### The START Event
+
+This event is emitted when Web Monetization API is successfully started.
+
+To use it, you can bind your own listener to the `GameWebMonetization.START` event:
+
+```js
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
-    // Here your code
+    // Your handler
 });
 ```
 
-Where it says **Here your code** we will put a console.log of the argument that the event sends us, and then we will go to our browser console and observe what it has returned to us, the code should look like this:
+**Tip:** Remember to do this _before_ calling `start()` on the plugin!
+
+To test this, let's make it log out some information to the console when the event fires, so we can observe what it returns in our browser Dev Tools:
+
+Add the following code to your `main.js` file, _before_ you call `gameWebMonetization.start()`:
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
-    // Here your code
     console.log(event);
 });
 ```
-As a result in console we should have something like this:
+
+If you now test this, you should see the following in your Dev Tools console:
 
 ![Result of Event Start](../img/part3/6-resulteventstart.png)
+
+The event handler is sent an object that contains the following properties:
 
 property | details
 --- | ---
 `paymentPointer` | Your payment account URL. The same value is used as the content in your tag.
 `requestId` | This value is identical to the session ID/monetization ID (UUID v4) generated by the user agent .
 
-<br />
+You may have noticed we've been sent both `paymentPointer` and a `requestId`.
 
-If you notice  we have **paymentPointer** and a **requestId**
+You can use the `start` event to know that your game is being monetized. At this point you could show a message to the player, thanking them, or perhaps unlocking some extra content.
 
+**Important:** Every time you change the browser window, or swap to another browser tab, the monetization stops. When the player returns to the window, the `start` event will be fired again. So be aware of this flow in your game code and handle it appropriately.
 
-We will need this event when we want to know that the game is being monetized and to be able to show/hide (like a message) something dynamically.
- 
-Now you have to be careful because every time you change the browser window the monetization stops and you will have another emission of the start event.
+### isMonetized
 
-So now you know, use this event to know when the monetization starts.
+The `start` event is useful to know when monetization _begins_, but what if you want to check if your game is monetized or not somewhere deeper in your code?
 
-<br />
+For this, you can use the `isMonetized` boolean property.
 
-### isMonetized.
+This property can be checked at any point in your game and provides a simple true/false response to the question "Has this player monetized my game?"
 
-In the course of your game, you may only be interested in knowing if it is being monetized or not in a not so dynamic way and to know this only when a scene or a certain game starts, so for that we have the **.isMonetized** property that it is independent of the event and it only returns a boolean that we will only know in what state it is when this property is called.
-
-Now we will do a **console.log** before starting the monetization and then another **console.log** inside the event to see its changes, put the following code:
+Let's test this by modifying our `main.js` to console log the state of the property before and after the `start` event:
 
 ```javascript
 var gameWebMonetization = new GameWebMonetization({
@@ -155,19 +178,23 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
 });
 ```
 
-Now if we go to the browser console we can see that before the monetization starts and the event is generated we will have a **false** and then **true** (true is when it is being monetized). 
+If you test this code you'll see that before the monetization starts the property is `false` and it switches to `true` after the `start` event has fired:
 
 ![isMonetized result](../img/part3/7-ismonetized_result.png)
 
-Now, call **.isMonetized** in any part of your game where you want to check the status at that moment and give a prize or benefit to the user.
+You you can check the `isMonetized` property at any point in your game. It is kept up to date internally by the plugin, so is safe to use to perhaps award the player a special prize or in-game benefit.
 
-<br />
+### Knowing the current State
 
-### Know the current state
+The plugin goes through different states in its life-cycle:
 
-The plugin goes through different states, namely: **started**, **stopped** or **pending**.
+1. **started** - The plugin has been successfully started and is monetising your content.
+2. **stopped** - The plugin is currently stopped and not monetising your content.
+3. **pending** - The plugin has been asked to start and is currently trying to negotiate the start-up, but hasn't yet completed this step.
 
-To know the state, just call the **.state** property, let's do the same as we did with **isMonetized** but changing it to **state**, you should have the following code:
+To know the current state you can query the `state` property.
+
+Let's do the same as we did with `isMonetized` to view the `state`. Here is an updated `main.js` to test this:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
@@ -185,18 +212,19 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
     // New code
     console.log('[inside event start] - The state: ', gameWebMonetization.state);
 });
-
 ```
 
 And in the console you will see the following:
 
-![the state](../img/part3/8-thesate.png)
+![The state](../img/part3/8-thesate.png)
 
-### The pending event
+Access to the plugins state is handy for internal debugging.
 
-The event is emitted while the Web Monetization API is preparing to start to monetize your site.
+### The PENDING Event
 
-We will copy the start event that we have listening and its console.log but changing the word **start** to **pending**, you should now have this code:
+This event is emitted while the Web Monetization API is preparing to start to monetize your site. This happens after you call the `start` method on the plugin. The API will enter a state of 'pending', meaning it's currently negotiating to start with your Payment Pointer, but hasn't finished doing so yet. If the negotiation is successful, then the plugin will emit its `START` event.
+
+Let's edit our `main.js` to demonstrate this state:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
@@ -219,16 +247,23 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
 });
 ```
 
-Now we go to the browser and we will see the following:
+If we go to the browser we will see the following:
 
-![Peding event](../img/part3/9-pending_event.png)
+![Pending event](../img/part3/9-pending_event.png)
 
-If you look now we already get the pending status. In event we receive the same as in the **start** event so it is not necessary to see what is in there.
+Looking at the console logs you can see the API flow in action.
 
-### The progress event
+If there is a problem connecting to your Payment Pointer then the flow would be `PENDING` followed by the `STOP` event. If the connection was successful the flow would be `PENDING` followed by the `START` event.
 
-This event is emitted when the Web Monetization API receives a progress event.
-We will use the following code to know the progress:
+If there is a network error, for example wifi drops out, while the request is still `PENDING` then it will remain in this state indefinitely, never reaching the `STOP` event. So always use the `isMonetized` boolean in your game code to be aware of the _current_ state of monetization.
+
+### The PROGRESS Event
+
+When the Web Monetization API successfully connects to your Payment Pointer it will start to stream micropayments into your wallet. Each time this happens it will fire a `PROGRESS` event.
+
+This event contains lots of useful data, including how much was just streamed to your wallet and you can use it in your game to keep track of the payment stream, or perhaps use it to visually show a special animation or similar.
+
+You can use the event like this:
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.PROGRESS, (event) => {
@@ -236,9 +271,11 @@ gameWebMonetization.on(GameWebMonetization.PROGRESS, (event) => {
 });
 ```
 
-This time we have used a console.log to event to see what it is returning to us, if we open the console we will see the following:
+Add the above into your `main.js` and check it from a browser. Open the console to view the output:
 
 ![Progress event](../img/part3/10-progress_event.png)
+
+This event gives us lots of useful properties:
 
 property | details
 --- | ---
@@ -250,28 +287,29 @@ property | details
 `receipt` | base64-encoded STREAM receipt issued by the Web Monetization receiver to the Web Monetization provider as proof of the total amount received in the stream.
 `totalAmount` | the sum of what has been received with the current paymentPointer, if the paymentPointer is changed this amount will be reset
 
-<br />
+As you can see, that's a lot of handy data!
 
-This will help us to know the progress of the monetization at all times, this event is emitted many times so be careful with it.
+Perhaps the most interesting properties are `assetCode` and `totalAmount`. The `assetCode` is the type of currency we are receiving, in this case it is the XRP cryptocurrency. Don't worry, your wallet will convert the coins automatically to your chosen currency.
 
-If you look the most remarkable thing would be to see the **assetCode** and **totalAmount**.
+The `totalAmount` is the amount of income that we have obtained so far from the player during _this play session_. This counter is reset if the page containing your game is refreshed. It doesn't persist longer than a single play session.
 
-The assetCode is the type of currency we are receiving, in this case it is the XRP cryptocurrency (don't worry, your wallet will convert the coins automatically).
+As its name implies, the `PROGRESS` event helps you keep track of the monetization process at all times. Because the stream of payments to your wallet is constant this event is fired many times. During testing we saw it fired _every 2 seconds_ that the game was running, but the actual frequency may be higher or lower than this. So be careful with what your game does as a result of this event!
 
-The **totalAmount** is the amount of income that we are obtaining by a user (this counter is reset every time the user restarts the game).
+Rather than hooking this event to say an in-game animation, you may be better off aggregating the information within it, then using that from your own timed in-game events. As you may expect, the plugin can do some of this for you, which we'll cover in a moment :)
 
-<br />
+### The STOP Event
 
-### The stop event
+Finally, we have the `STOP` event. This event is emitted when the API enters a stopped state. This could be from you calling the plugins `stop` method, or by the user stopping the payment via their browser.
 
-And finally we also have the stop event, so copy the start event and change start to stop, it should look like this:
+You listen for it in the same way as the other events. Let's modify our `main.js` to handle this:
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.STOP, (event) => {
     console.log('[inside event stop] - The state: ', gameWebMonetization.state);
 });
-
 ```
+
+
 
 Once the event is set, it will not be emitted until we call the **stop()** method, now what we will do is call that method after a while.
 Use **setTimeout** with five seconds and call the **stop()** method, you should have the following code:
