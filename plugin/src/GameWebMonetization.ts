@@ -204,7 +204,8 @@ export class GameWebMonetization extends EventEmitter
     }
 
     /**
-     * Stops the Web Monetization process, removing the `meta` tags from the document head.
+     * Stops the Web Monetization process, removing the `meta` tags from the document head
+     * and removing the event listeners.
      * 
      * @returns The GameWebMonetization instance.
      */
