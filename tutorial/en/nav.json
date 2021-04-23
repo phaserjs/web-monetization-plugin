@@ -1,0 +1,13 @@
+{
+    "title": "Game Web Monetization",
+    "icon": "grid",
+    "items": [
+        { "page": "index", "label": "1. Web Monetization?" },
+        { "page": "part2", "label": "2. Coil and Uphold" },
+        { "page": "part3", "label": "3. Configure the Plugin" },
+        { "page": "part4", "label": "4. The Plugin API" },
+        { "page": "part5", "label": "5. Dividing the income" },
+        { "page": "part6", "label": "6. Using in a Phaser Game" },
+        { "page": "part7", "label": "7. Conclusion" }
+    ]
+}
