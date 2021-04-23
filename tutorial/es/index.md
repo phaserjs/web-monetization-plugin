@@ -6,9 +6,7 @@ author: Richard Davey
 twitter: photonstorm
 ---
 
-# ¿Qué es Web Monetization?
-
-![Logo Web Monetization](../img/part1/logo-web-monetization.svg)
+![Logo Web Monetization](part1/intro.png)
 
 En esencia, la monetización web es una JavaScript browser API que permite a los desarrolladores de juegos monetizar sus juegos mediante la creación de un flujo de pago constante. Mientras los jugadores juegan, los micropagos se envían a su billetera/wallet. También se propone como un estándar W3C. El objetivo es resolver un problema común:
 
@@ -26,6 +24,8 @@ Esto sucede porque puede inicializar fácilmente el plugin de Game Web Monetizat
 ### ¿Cómo se reciven los micropagos?
 
 Para poder obtener los micropagos es necesario tener una billetera/wallet (puedes ver las que hay disponible en el siguiente enlace [aquí](https://webmonetization.org/#wallets:~:text=Web%20Monetization%20Wallets)).
+
+![Wallets](part1/wallets.png)
 
 Gracias a la billetera/wallet tu puedes generar un punto de pago único por medio de Interledger protocol que es el que nos permite tener un flujo constante de micropagos.
 
