@@ -1,26 +1,26 @@
 ---
 title: Web Monetization for Games
-subtitle: Parte 3 - Una descripción general del plugin
+subtitle: Parte 3 - Una vistazo general del plugin
 date: 
 author: Richard Davey
 twitter: photonstorm
 ---
 
-# Una descripción general del plugin
+# Un vistazo general del plugin
 
 Vamos a empezar a usar el plugin Game Web Monetization y a ver qué funciones están disponibles. 
 
-Primero que todo recuerda que deberías tener tu payment pointer, si no lo tienes recuerda que lo has puesto en Coil así que lo podremos recuperar de [acá](https://coil.com/).
+Antes de que empecemos deberías estar registrado con Coil y con un proveedor de billetera/wallet digital como Uphold. Si aún no lo has hecho por favor regresa a la [Parte 2](part2) y hazla, ya que todo lo que sigue desde este punto se basa en esa parte. 
 
-Ve a la web de Coil y luego en **Settings** busca **Payouts** y verás tu payment pointer.
+Logueate en el sitio oficial de [Coil](https://coil.com) y luego clica en **Settings** y busca **Payouts** y ahí verás tu payment pointer.
 
 ![PaymentPointer](../img/part3/1-paymentpointer.png)
 
-Ahora bien lo que haremos será generar una página simple de pruebas así que abre tu editor de código favorito (yo usaré [Visual Studio Code](https://code.visualstudio.com/)), crea una carpeta en el escritorio (on donde quieras) y crea un **index.html** y un **main.js**, tal cual lo tengo en mi editor de código: 
+Para comprobar que todo funciona, crearemos una página de prueba sencilla. Abra su editor favorito (para este tutorial usaremos VS Code), cree una nueva carpeta y dentro de ella guarde los archivos vacíos `index.html` y `main.js`.
 
 ![Base files](../img/part3/2-basefiles.png)
 
-Vamos a index.html y creamos su estructura básica llamando a main.js y definiéndolo como módulo para preparar todo, tal cual este modelo: 
+Vamos a index.html y creamos su estructura básica llamando a main.js y definiéndolo como módulo: 
 
 ```html
 <!DOCTYPE html>
@@ -38,20 +38,22 @@ Vamos a index.html y creamos su estructura básica llamando a main.js y definié
 </html>
 ```
 
-Ahora, bajaremos el plugin [aquí](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js) y lo pondremos en el proyecto (justo en la raíz).
+Ahora es el momento de [descargar el plugin Game Web Monetization](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js) - guarde este archivo junto con el index y el main:
 
 ![Base](../img/part3/3-basefileswithplutin.png)
 
-Como ya tenemos puesto el tipo módulo ya podremos cargar nuestro plugin desde main.js, usaremos imports aunque también podrías usar la versión es5 y cargarlo por medio del tag script y tendría que funcionar igual.
+Esta versión del plugin se expone como un ESM (Módulo ES), por lo que podemos cargarlo directamente en `main.js`. Para este tutorial usaremos importaciones y JavaScript moderno. Sin embargo, también puede encontrar las versiones ES5 y TypeScript del complemento en el repositorio de GitHub, en caso de que las necesite. Sin embargo, para el resto de este tutorial, asumiremos que está utilizando el ESM.
 
-Vamos a **main.js** y hacemos import a nuestro plugin:
+Editemos `main.js` para importar nuestro complemento:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
 ```
 
-Ahora en la siguiente línea para preparar el plugin hay que instanciarlo asignando una variable y colocando nuestro payment pointer, te tiene que quedar así (recuerda poner tu payment pointer): 
- 
+Con el módulo importado podemos instanciar el complemento. El constructor requiere un objeto de configuración que contenga un `paymentPointer`. Por eso es importante que ya haya obtenido uno de su servicio de billetera.
+
+Agregue lo siguiente a `main.js` y recuerde reemplazar el valor de `paymentPointer` a continuación por el suyo:
+
 ```javascript
 const gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
@@ -59,15 +61,15 @@ const gameWebMonetization = new GameWebMonetization({
 
 ```
 
-Lo que hemos hecho hasta el momento es preparar el plugin, se ha instanciado y se ha asignado un payment pointer, ahora hay que iniciarlo. 
+Lo que hemos hecho es importar el módulo, crear una instancia del complemento y asignarle un puntero de pago. Ahora, solo tenemos que empezar.
 
-Abrimos nuestro **index.html** en el navegador (yo usaré **Visual Studio Code** y la extensión **Live Server**).
+Abra `index.html` en un navegador. Para este tutorial usamos [Visual Studio Code](https://code.visualstudio.com/) con la extensión [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), pero puede usar cualquier método, siempre y cuando el archivo se sirva a su navegador (por un servidor web) y no solo se abra directamente.
 
-Una vez abierto aún te tendrá que salir que el sitio no es monetizable y esto es debido a que hemos preparado el plugin pero no hemos iniciado la monetización.
+Una vez abierto, seguirá apareciendo que el sitio no se puede monetizar. Esto se debe a que hemos preparado el plugin pero no hemos iniciado la monetización:
 
 ![no monetizable coil plugin](../img/part3/4-nomonetizable.png)
 
-Volvamos a nuestro **main.js** y ahora iniciamos la monetización con el método **start()**, te tendría que quedar así:
+Volvamos a nuestro **main.js** y ahora iniciamos la monetización con el método **start()**:
 
 ```javascript
 import { GameWebMonetization } from './GameWebMonetization.js';
@@ -83,7 +85,7 @@ Ahora si volvemos a la web y actualizamos veremos que nuestro sitio empieza a mo
 
 ![is monetizable](../img/part3/5-ismonetizable.png)
 
-Felicidades, ya solo con esa configuración puedes monetizar en todo momento pero también hay que darle alguna recompensa al usuario así que para eso tenemos diferentes métodos y propiedades que nos ayudarán a conocer el estado del plugin y vamos a ver algunas.
+**Felicidades**, ya solo con esa configuración puedes monetizar en todo momento pero también hay que darle alguna recompensa al usuario así que para eso tenemos diferentes métodos y propiedades que nos ayudarán a conocer el estado del plugin y vamos a ver algunas.
 
 ## Métodos, eventos y propiedades
 
