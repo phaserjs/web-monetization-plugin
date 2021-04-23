@@ -1,3 +1,7 @@
+---
+title: Game Web Monetization Plugin
+---
+
 ![Game Web Monetization Plugin](https://raw.githubusercontent.com/photonstorm/gamewebmonetization/main/banner.jpg "Game Web Monetization Plugin")
 
 # Game Web Monetization Plugin
