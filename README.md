@@ -14,7 +14,7 @@ This folder contains the following:
 
 ### `plugin/docs`
 
-Here is the complete documentation for the plugin, describing every property, method and interface it uses. Simply open `index.html` in a browser to navigate it.
+Here is the [complete documentation](https://photonstorm.github.io/gamewebmonetization/plugin/docs/) for the plugin, describing every property, method and interface it uses. You can view the docs online, or if you have the repo checked-out simply open `plugin/docs/index.html` in a browser.
 
 ### `plugin/src`
 
@@ -42,4 +42,4 @@ You can play the game [HERE](https://photonstorm.github.io/gamewebmonetization/g
 
 ## Tutorial
 
-In the [tutorial folder](https://github.com/photonstorm/gamewebmonetization/tree/main/tutorial) you will find a complete Game Web Monetization Plugin tutorial, that walks you through the process of creating your own Web Monetized game using the plugin. The tutorial is available in English, Spanish and Chinese (coming soon)
+You can find a comprehensive [7 part tutorial](https://phaser.io/tutorials/game-web-monetization) on using the Game Web Monetization Plugin on the Phaser web site.
