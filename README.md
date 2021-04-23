@@ -38,7 +38,7 @@ In the [game folder](https://github.com/photonstorm/gamewebmonetization/tree/mai
 
 The game is called **3 Candies!** and is a fast-paced puzzle game. See if you can find the 3 matching candies before the time runs out. If you play the game in a Web Monetized browser then you will get an extra life and an extra choice of background to play with.
 
-You can play the game [HERE](https://photonstorm.github.io/gamewebmonetization/game/)
+You can [play the game here](https://photonstorm.github.io/gamewebmonetization/game/), too! Be sure to have the Web Monetization Extension installed in your browser to get the full benefits :)
 
 ## Tutorial
 
