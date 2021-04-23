@@ -167,10 +167,10 @@ var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
 
+gameWebMonetization.start();
+
 // New code:
 console.log('Is monetized? ', gameWebMonetization.isMonetized);
-
-gameWebMonetization.start();
 
 // New code:
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
@@ -202,12 +202,12 @@ import { GameWebMonetization } from './GameWebMonetization.js';
 var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
+ 
+gameWebMonetization.start();
 
 // New code
 console.log('The state: ', gameWebMonetization.state);
- 
-gameWebMonetization.start();
- 
+
 gameWebMonetization.on(GameWebMonetization.START, (event) => {
     // New code
     console.log('[inside event start] - The state: ', gameWebMonetization.state);
@@ -232,10 +232,10 @@ import { GameWebMonetization } from './GameWebMonetization.js';
 var gameWebMonetization = new GameWebMonetization({
     paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
 });
- 
-console.log('The state: ', gameWebMonetization.state);
- 
+  
 gameWebMonetization.start();
+
+console.log('The state: ', gameWebMonetization.state);
 
 // New code
 gameWebMonetization.on(GameWebMonetization.PENDING, (event) => {
