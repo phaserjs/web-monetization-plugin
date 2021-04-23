@@ -5,134 +5,256 @@ date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
 ---
-# Como usar el plugin en un juego real
 
-### Conociendo el proyecto
+Aprendimos a probar las diferentes característica del plugin en la parte anterior de esta serie de tutoriales. Si te lo perdiste, vuelve a leerlo antes. Ahora es el momento de usar el plugin en un juego de Phaser 3 adecuado. En este tutorial, tomaremos un juego Phaser listo para usar y trabajaremos en la implementación del plugin Game Web Monetization en él.
 
-Ya llegó la hora de implementar el plugin dentro de nuestro juego.
+## Descarga los archivos del Juego
 
-Baja el juego de pruebas en el siguiente repositorio [aquí](https://github.com/photonstorm/gamewebmonetization) y dentro de ese repositorio encontrarás el juego en la siguiente ruta: **tutorial/examples/3Candies**.
+Para comenzar, descargue o consulte el [Repositorio de GitHub de Game Web Monetization](https://github.com/photonstorm/gamewebmonetization). Si está familiarizado con el uso de git, puede consultar el repositorio a través de http:
 
-Copia la carpeta en el sitio que quieras y arrastra la carpeta en tu Visual Studio Code o tu editor de texto favorito.
+```
+https://github.com/photonstorm/gamewebmonetization.git
+```
 
-Dentro de la carpeta del juego podremos ver un **index.html** un **src** y la carpeta donde se aloja **phaser**, ya todo está preconfigurado así que solo nos interesa ir a **src**.
+Or ssh:
 
-Dentro de **src** tenemos una carpeta llamada **plugins** y ahí es donde pondremos nuestro plugin, en el juego ya lo tenemos descargado así que no tendrás que preocuparte de volverlo a poner, de todas formas si necesitas bajar el plugin recuerda que lo tienes en este enlace: [aquí](https://github.com/photonstorm/gamewebmonetization/blob/main/plugin/dist/GameWebMonetization.js).
+```
+git@github.com:photonstorm/gamewebmonetization.git
+```
+
+Si lo prefieres, puedes [descargar un archivo zip](https://github.com/photonstorm/gamewebmonetization/archive/refs/heads/main.zip) de todo el repositorio.
+
+Una vez que los archivos estén en su computadora, encontrará el juego de muestra en la carpeta `tutorial/examples/3Candies`.
+
+Arrastre y suelte la carpeta en Visual Studio Code o su editor de elección para que pueda ver fácilmente el código fuente de los distintos archivos.
+
+# Estructura del proyecto
+
+Dentro de la carpeta del juego podemos ver un archivo `index.html`, junto con las carpetas `src` y `phaser`. Todo ya está preconfigurado para ejecutarse, así que vamos a sumergirnos en la carpeta `src`.
+
+Dentro de `src/plugins` verás una carpeta con el plugin Game Web Monetization en su interior.
 
 ![Structure folder](../img/part5/1-structure_folders.png)
 
-Ahora lo siguiente más importante que tenemos serán las escenas, como verás tenemos 4 escenas, **Intro**, **BackgroundScene**, **Menu** y **MainScene** que es la escena principal del juego.
+El juego está dividido en 4 escenas de Phaser:
+
+1. **Intro** - El mensaje de introducción y la comprobación del plugin.
+2. **BackgroundScene** - El fondo que se desplaza detrás del juego.
+3. **Menu** - El menú principal.
+4. **MainScene** - La escena principal del juego.
 
 ![Scenes folder](../img/part5/2-scenes_folder.png)
 
-Otra cosa que deberías prestar atención es al archivo que gestiona las variables globales, este archivo está dentro de **src**.
+También hay otro archivo importante: `src/global_vars.js`:
 
 ![Global vars](../img/part5/3-global_vars.png)
 
-Si abres el archivo verás una sección comentada en donde pondremos nuestra configuración del plugin, pero mientras puedes observar que hemos definido un **background_selected**, esta variable nos servirá para activar o desactivar el menú premium ya que será usada por las escenas **Menu** y **BackgroundScene**.
-Puedes jugar un poco y cambiar normal a premium, y observar los cambios, pero por favor devuelvela a "normal".
+Este archivo contiene todas las variables que puedes cambiar fácilmente para modificar el juego en sí. Si abre el archivo en su editor, verá una sección comentada donde se almacena la configuración del plugin.
+
+También verá un objeto llamado `background_selected`. Dentro de esto, la propiedad `active` se establece en `normal`. Esto controla si el juego se está ejecutando en el modo monetizado, o no, y lo utilizan **Menu** y **BackgroundScene** para mostrar diferentes fondos del juego.
 
 ![Normal selected](../img/part5/4-background_selected.png)
 
-El juego ya está completo y preparado para otorgar beneficios al usuario como por ejemplo: 
-* Un mensaje personalizado al usuario si se está monetizando.
-* La posibilidad de cambiar el fondo en la partida por un fondo más colorido.
-* Tener 1 vida extra durante la partida.
+## Adding Monetized Benefits
 
-Inicia el juego con tu servidor favorito (yo usaré la extensión de Live Server de Visual Studio Code), ve al navegador y podrás observar que el juego ha empezado: 
+Agregaremos los siguientes beneficios al jugador si está monetizando nuestro juego:
+
+* "¡Un gracias!" mensaje de introducción.
+* La opción de cambiar el fondo por uno más colorido.
+* Ganarán 1 vida extra durante el juego.
+
+Ejecute el juego abriendo el `index.html` con el servidor web de su elección. Como antes, usaremos la extensión VS Code Live Server para esto. Abra el navegador y debería ver que el juego ha comenzado:
 
 ![First start game](../img/part5/5-first_start_game.png)
 
-Si te fijas hemos preparado una escena de introducción y es porque esta escena la usaremos para iniciar la monetización, la monetización tarda unos segundos hasta que se pueda resolver si se está monetizando o no y gracias a esta escena podemos darle tiempo al plugin a empezar a monetizar el juego.
+Hemos agregado una pantalla de introducción a nuestro juego. Esto se debe a que la API de monetización web puede tardar unos segundos en negociar, lo que es tiempo de sobra para mostrarles un mensaje breve sobre los beneficios de la misma.
 
-<br />
+### Importando el plugin
 
-### Configurando el plugin
+Llegó el momento de poner el plugin en nuestro juego.
 
-Bien, llegó el momento de poner el plugin en nuestro juego, vamos al archivo **global_vars.js** e importamos el plugin (esto lo hemos visto en los tutoriales anteriores), luego de importar vamos a exportar la variable para que pueda ser llamada en otro lado del juego, tu código debería verse de esta manera: 
+Editamos el archivo **global_vars.js** e importamos el plugin arriba del todo, luego crea una instanacia del plugin:
+
+```js
+import { GameWebMonetization } from "./plugins/GameWebMonetization/GameWebMonetization.js";
+
+// Monetization config
+export const gamewebmonetization = new GameWebMonetization({
+    paymentPointer: '$ilp.uphold.com/zdXzL8aWJ4ii'
+});
+```
+
+Recuerde agregar el código anterior directamente debajo de la declaración de importación `CandyGrid`.
+
+El código que agregó debería verse así:
 
 ![Config payment pointer and plugin](../img/part5/6-config_paymentpointer_and_plugin.png)
 
-Recuerda que aún no empezarás a monetizar nada así que vamos a configurar eso en el archivo **intro.js**.
+El plugin se ha importado y creado con nuestro payment pointer. Ahora necesitamos iniciar el complemento en el archivo `scenes/Intro.js`.
 
-Vamos a nuestra escena **Intro**, importamos nuestro gamewebmonetization de **global_vars.js** de esta forma: 
+Edite `Intro.js` e importe la instancia del complemento, para que podamos usarlo:
 
 ```javascript
 import { gamewebmonetization } from "../global_vars.js";
 ```
-una vez hecho esto vamos a iniciar nuestro plugin con **.start()**, vamos a **init ()** e inmediatamente llamamos al método **.start()**.
+
+Como has aprendido en el tutorial anterior, el plugin necesita su método `start`. Hay que llamarlo antes de que puedas realizar cualquier cosa con el plugin, llamaremos `start` en el método Scene `init`.
+
+Agrega la siguiente línea de código al comienzo de `init`:
+
+```js
+gamewebmonetization.start();
+```
+
+El código se tiene que ver así:
+
+```js
+    init ()
+    {
+        gamewebmonetization.start();
+
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        this.changingScene = true;
+```
+
+Junto con el código de importación la llamada debería verse de esta manera: 
 
 ![Start Monetization](../img/part5/7-start_monetization.png)
 
-Ahora si reinicias tu juego verás que ya estarás monetizando.
+Reinicia el juego en el navegador y, si tienes la extensión Coil funcionando, verás que el juego está monetizado:
 
-![Is monetized with extension Coil](../img/part5/8-ismonetized_extension.png)
+![Monetized via the Coil extension](../img/part5/8-ismonetized_extension.png)
+
+## Agregando beneficios al jugador
+
+Monetizar está muy bien, pero ahora deberíamos comenzar a brindar algunos beneficios a los jugadores que nos apoyan. Primero, mostremos un mensaje, "Thank you" .
+
 
 Monetizar está bien pero ahora hay que empezar a darle bonificaciones al usuario o algún mensaje que indique los agradecimientos por apoyarnos.
-En el proyecto ya tenemos preparado un mensaje para eso en forma de imágenes con texto que se encuentran en la carpeta de **assets**, estos archivos son **intro.png** e **introthanks.png**
+
+En la carpeta `assets` verás dos PNG: `intro.png` y `introthanks.png`: 
 
 ![Intro image](../img/part5/9-intro.png)
-
 ![Intro image](../img/part5/10-introthanks.png)
 
-Así que lo que haremos será cambiar esos mensajes de agradecimientos en el intro.
+Editaremos el código para mostrar el mensaje correcto, según el estado de la API.
 
-Para poder cambiar los mensajes bajamos y justo debajo de **const intro** (en donde agregamos la imagen a escena) vamos a usar nuestro evento **start** y cambiar la textura de nuestra imagen (recuerda que ya hemos cargado todas las imágenes del proyecto por ti), seguro que ya recuerdas cual es, así que tu código tiene que quedarte más o menos así: 
+Abre el archivo `Intro.js`, y ve hacia abajo dentro del método `create` donde se agrega la imagen `intro`:
 
-```javascript
-        const intro = this.add.image(x, 240, 'intro');
- 
-        // Plugin here
-        gamewebmonetization.on("start", () => {
-            intro.setTexture("introthanks");
-        });
+```js
+const intro = this.add.image(x, 240, 'intro');
 ```
 
-Volvamos a nuestro juego y observemos que es lo que ocurre.
+Vamos a utilizar el evento del plugin `START` para cambiar esta textura. Ya hemos cargado todas las imágenes necesarias, por lo que todo lo que necesitamos es un event listener y actuar en consecuencia:
+
+```javascript
+const intro = this.add.image(x, 240, 'intro');
+
+// Plugin here
+gamewebmonetization.on("start", () => {
+    intro.setTexture('introthanks');
+});
+```
+
+Volvamos a nuestro juego y veamos qué sucede:
 
 ![Change intro thanks](../img/part5/11-change_intro_thanks.gif)
 
-¡Bien ya tenemos un mensaje de agradecimientos personalizado para nuestro usuario!
+Cuando se activa el evento, la textura de la introducción se cambia a "Thank you!". Ahora vamos a darle al jugador la posibilidad de tener un fondo exclusivo.
 
-<br />
+### Cambiando el fondo premium
 
-### Cambiando el fondo
+Cuando vayas al menú principal del juego, verás dos botones en la parte inferior. Estos le permiten al jugador alternar entre los fondos Estándar y Premium. Solo si están monetizados en la Web pueden elegir el fondo Premium. Si no es así, mostraremos un mensaje de alerta.
 
-Ahora si probamos a ir al menú tenemos los botones para cambiar de fondo, si clicamos el del fondo premium veremos que nos sale una notificación de que es necesario tener el plugin así que ahora vamos a agregar ese fondo exclusivo al usuario.
+Recuerda la Parte 3 del tutorial que el plugin ofrece una propiedad booleana llamada `isMonetized`. Podemos leer `isMonetized` para saber si debemos habilitar ambos botones para el jugador.
 
-El sistema de cambio de fondos ya está completamente implementado, si te fijas si vas al archivo **Menu.js** verás que dentro de **init ()** tienes una variable llamada **this.isMonetized = false** y si analizas lo que hace un poco más abajo verás que nos ayuda a gestionar el fondo gracias a **background_selected.active** que está declarado en **global_var.js** una vez que se presione un botón u otro se cambiará el background activo y se pondrá en normal o premium y gracias a esto luego **BackgroundScene.js** sabrá automáticamente que fondo usar.
-
-Bien, dentro de **Menu.js** solo vamos a usar el método **.isMonetized**, así que recuerda importar la instancia de nuestro plugin:
+Al igual que con las otras escenas, necesitamos importar el plugin y también vamos a importar el objeto `background_selected`. Esto almacenará nuestra elección de fondo de los botones:
 
 ```javascript
 import { background_selected, gamewebmonetization } from "../global_vars.js";
 ```
 
-Así que asigna a this.isMonetized a gamewebmonetization.isMonetized y ya automáticamente si cambias el estado del botón verás que te dejará cambiar de fondo y podrás jugar con los fondos que quieras, tu código te tendría que quedar así: 
+Ahora podemos leer el booleano `isMonetized` y le daremos al botón Premium Background un leve alfa si no están monetizados. Agregue lo siguiente después de la línea `premiumBackgroundButton.setInteractive({ useHandCursor: true });`:
 
-![Change background to premium](../img/part5/12-menu_background_premium.png)
+```js
+if (!gamewebmonetization.isMonetized)
+{
+    premiumBackgroundButton.setAlpha(0.9);
+}
+```
 
-Ahora si pruebas a jugar otra vez, verás que ya tienes la opción de cambiar de fondo.
+El último cambio que haremos al botóm Premium es agregarle un evento `POINTER_DOWN`. El código se ve así:
+
+```js
+premiumBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+    this.popfx.play();
+
+    event.stopPropagation();
+
+});
+```
+
+Cuando se hace click, todo lo que hace actualmente es reproducir un efecto de sonido. Comprobaremos el estado de monetización y actualizaremos el botón o mostraremos una alerta. Cambie el código anterior por el siguiente:
+
+```js
+premiumBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+    this.popfx.play();
+
+    if (gamewebmonetization.isMonetized)
+    {
+        this.isPremium = true;
+
+        normalBackgroundButton.setTexture('normal_background-button');
+        premiumBackgroundButton.setTexture('premium_background-button-selected');
+    }
+    else
+    {
+        alert('You need the plugin!');
+    }
+
+    event.stopPropagation();
+
+});
+```
+
+Ahora, si vuelve al juego en el navegador, veras que tiene la opción de cambiar el fondo haciendo click en los dos botones:
 
 ![Change background gif](../img/part5/13-premium_background.gif)
 
-### Vidas extras
+### Vida extra
 
-Ahora por último vamos a hacer que el usuario tenga una vida extra exclusiva, ve a la escena principal **MainScene.js** y si te fijas también tenemos la variable llamada this.isMonetized pero si bajas hasta el método create verás está linea: 
+La última ventaja que le daremos al usuarios será una vida extra. 
+
+Abre el archivo `scenes/MainScene.js` en su editor. En el método `create` verá el siguiente código:
 
 ```javascript
-        // Lifes
-        this.lifes = new Lifes(this, this.isMonetized);
+// Lifes
+this.lifes = new Lifes(this, this.isMonetized);
 ```
 
-En la instanciación de las vidas si te fijas le estamos pasando **this.isMonetized**, acá perfectamente podríamos poner true o false, juega un poco con eso y prueba el juego, pero recuerda dejar this.isMonetized como estaba antes.
+Puede ver que cuando se crea el Game Object `Lifes`, le pasamos el booleano `isMonetized` como parámetro. En lugar de pasar este valor, puede pasar `true` o `false` para probar que sucede por ti mismo.
 
-Vamos hasta el método **init()** e reasignamos this.isMonetized tal cual lo hicimos con el Menu, recuerda de importar **gamewebmonetization**, te tendría que quedar así: 
+Ve al método `init`y cambia esta linea: 
+
+```js
+this.isMonetized = false;
+```
+
+Por esta:
+
+```js
+this.isMonetized = gamewebmonetization.isMonetized;
+```
+
+Con este cambio, el juego principal ahora detectará si la API está monetizada o no:
 
 ![Extra life is monetized](../img/part5/14-extra_life_ismonetized.png)
 
-Si inicias la partida verás que ahora tendrás 3 vidas y una de ellas es de oro por lo tanto es la vida extra que le damos al usuario.
+Si inicias el juego verás que ahora tienes 3 vidas y una de ellas es de oro. Esta es la vida extra que le dimos al jugador:
 
 ![Extra life gif](../img/part5/15-extra_life.gif)
 
-Como has visto hay muchas posibilidades a la hora de usar el plugin de monetización y como hemos mencionado antes todo depende de lo que quieras darle al usuario.
+Como has visto, hay muchas posibilidades a la hora de utilizar el plugin Game Web Monetization. Hemos mencionado algunas ideas aquí, pero realmente las posibilidades de recompensar como quieras son casi infintas. Quizás incluso puedas considerar mostrar cuánto dinero te han enviado en el juego real, o cuanto mayor sea la cantidad que te envía más ventajas obtendrán. Realmente todo depende de ti.

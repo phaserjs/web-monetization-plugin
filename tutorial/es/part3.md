@@ -287,7 +287,7 @@ property | details
 
 Como puede ver, ¡son muchos datos útiles!
 
-Quizás las propiedades más interesantes son `assetCode` y` totalAmount`. El `assetCode` es el tipo de moneda que estamos recibiendo, en este caso es la criptomoneda XRP. Aunque su billetera no esté configurada para XRP, esta es la moneda principal en la que Uphold transfiere. Sin embargo, no se preocupe, recibirá la moneda real deseada en su billetera. Si está utilizando un proveedor que no sea Uphold, debería ver que la moneda coincide con la establecida en su billetera.
+Quizás las propiedades más interesantes son `assetCode` y `totalAmount`. El `assetCode` es el tipo de moneda que estamos recibiendo, en este caso es la criptomoneda XRP. Aunque su billetera no esté configurada para XRP, esta es la moneda principal en la que Uphold transfiere. Sin embargo, no se preocupe, recibirá la moneda real deseada en su billetera. Si está utilizando un proveedor que no sea Uphold, debería ver que la moneda coincide con la establecida en su billetera.
 
 El `totalAmount` es la cantidad de ingresos que hemos obtenido hasta ahora del jugador durante _esta sesión de juego_. Este contador se reinicia si se actualiza la página que contiene su juego. No persiste más que una sola sesión de juego.
 
@@ -330,7 +330,7 @@ Intente ejecutar lo anterior y luego cambiar dentro y fuera de la pestaña varia
  
 ![Event Stop](../img/part3/11-stop_event.png)
 
-Alternativamente, podríamos falsificar esta acción usando `setTimeout` para llamar al método` stop` por nosotros, como en el siguiente código:
+Alternativamente, podríamos falsificar esta acción usando `setTimeout` para llamar al método `stop` por nosotros, como en el siguiente código:
 
 ```javascript
 gameWebMonetization.on(GameWebMonetization.STOP, (receive) => {
