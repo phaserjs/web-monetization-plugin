@@ -1,7 +1,7 @@
 ---
 title: Web Monetization for Games
 subtitle: Parte 5 - Como usar el plugin en un juego real
-date: 
+date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
 ---
