@@ -168,40 +168,93 @@ When you go to the Main Menu in the game you'll see two buttons at the bottom. T
 
 You may remember from Part 3 of the tutorial that the plugin offers a boolean property called `isMonetized`. We can read this to know if we should enable both buttons for the player, or not.
 
-
-The funds exchange system is already fully implemented, if you look if you go to the **Menu.js** file you will see that inside **init ()** you have a variable called **this.isMonetized = false** and If you analyze what it does a little further down, you will see that it helps us to manage the background thanks to **background_selected.active** that is declared in **global_var.js** once one button or another is pressed, the background will be changed active and it will be set to normal or premium and thanks to this then **BackgroundScene.js** will automatically know which background to use.
-
-Well, inside **Menu.js** we are only going to use the **.isMonetized** method, so remember to import the instance of our plugin:
+As with the other Scenes, we need to import the plugin and we're also going to import the `background_selected` object. This will store our choice of background from the buttons:
 
 ```javascript
 import { background_selected, gamewebmonetization } from "../global_vars.js";
 ```
 
-So assign **this.isMonetized** to gamewebmonetization.isMonetized and automatically if you change the state of the button you will see that it will let you change the background and you can play with the funds you want, your code should be like this:
+We can now read the `isMonetized` boolean and will give the Premium Background button a slight alpha if they are not monetized. Add the following after the line `premiumBackgroundButton.setInteractive({ useHandCursor: true });`:
 
-![Change background to premium](../img/part5/12-menu_background_premium.png)
 
-Now if you try to play again, you will see that you already have the option to change the background.
+```js
+if (!gamewebmonetization.isMonetized)
+{
+    premiumBackgroundButton.setAlpha(0.9);
+}
+```
+
+The final change to make is to fill-in the Premium Button `POINTER_DOWN` handler. Currently it looks like this:
+
+```js
+premiumBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+    this.popfx.play();
+
+    event.stopPropagation();
+
+});
+```
+
+When they click all it does currently is play a sound effect. We're going to check the monetization state and either update the button, or show an alert. Change the above code to the following:
+
+```js
+premiumBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+    this.popfx.play();
+
+    if (gamewebmonetization.isMonetized)
+    {
+        this.isPremium = true;
+
+        normalBackgroundButton.setTexture('normal_background-button');
+        premiumBackgroundButton.setTexture('premium_background-button-selected');
+    }
+    else
+    {
+        alert('You need the plugin!');
+    }
+
+    event.stopPropagation();
+
+});
+```
+
+Now if you play the game again, you will see that you have the option to change the background by clicking the two buttons:
 
 ![Change background gif](../img/part5/13-premium_background.gif)
 
-### Vidas extras
+### Extra Life
 
-Now finally we are going to make the user have an exclusive extra life, go to the main scene **MainScene.js** and if you look closely we also have the variable called **this.isMonetized** but if you go down to the create method you will see this line:
+Our final player benefit is to give them an extra life.
+
+Open the `scenes/MainScene.js` file in your editor. In the `create` method you will see the following code:
 
 ```javascript
-        // Lifes
-        this.lifes = new Lifes(this, this.isMonetized);
+// Lifes
+this.lifes = new Lifes(this, this.isMonetized);
 ```
 
-En la instanciación de las vidas si te fijas le estamos pasando **this.isMonetized**, acá perfectamente podríamos poner true o false, juega un poco con eso y prueba el juego, pero recuerda dejar **this.isMonetized** como estaba antes.
+You can see that when the `Lifes` Game Object is created, it accepts the `isMonetized` boolean as a parameter. Instead of passing this value, you could pass `true` or `false` instead to test this out for yourself.
 
-Let's go to the **init ()** method and reassign **this.isMonetized** as we did with the **Menu**, remember to import **gamewebmonetization**, it should look like this:
+Go to the `init` method and change this line:
+
+```js
+this.isMonetized = false;
+```
+
+To this:
+
+```js
+this.isMonetized = gamewebmonetization.isMonetized;
+```
+
+With this change in, the Main Game will now detect if the API is monetized or not:
 
 ![Extra life is monetized](../img/part5/14-extra_life_ismonetized.png)
 
-If you start the game you will see that now you will have 3 lives and one of them is gold, therefore it is the extra life that we give to the user.
+If you start the game you'll see that now you have 3 lives and one of them is gold. This is the bonus life we gave to the player:
 
 ![Extra life gif](../img/part5/15-extra_life.gif)
 
-As you have seen there are many possibilities when it comes to using the monetization plugin and as we have mentioned before it all depends on what you want to give the user.
+As you have seen there are many possibilities when it comes to using the Game Web Monetization plugin. We've just touched upon a few ideas here, but it really is endless how you wish to reward them. Perhaps you may even consider displaying how much money they have sent to you in the actual game, or the larger the amount, the more benefits they get? It's truly up to you.
