@@ -1,7 +1,7 @@
 ---
 title: Web Monetization for Games
 subtitle: Part 3 - An overview of the plugin
-date: 
+date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
 ---
