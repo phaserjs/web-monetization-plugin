@@ -1,5 +1,5 @@
 ---
-title: Web Monetization for Games
+title: Web Monetization para Juegos
 subtitle: Parte 3 - Como usar el Plugin
 date: 23rd April 2021
 author: Richard Davey

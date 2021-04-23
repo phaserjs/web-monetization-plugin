@@ -1,6 +1,6 @@
 ---
-title: Web Monetization for Games
-subtitle: Part 5 - Divide las ganancias
+title: Web Monetization para Juegos
+subtitle: Parte 5 - Divide las ganancias
 date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm

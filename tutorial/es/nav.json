@@ -1,13 +1,13 @@
 {
-    "title": "Game Web Monetization",
+    "title": "Web Monetization para Juegos",
     "icon": "grid",
     "items": [
-        { "page": "index", "label": "1. ¿Qué es Web Monetization?" },
+        { "page": "index", "label": "1. ¿Qué es?" },
         { "page": "part2", "label": "2. Coil y Uphold" },
         { "page": "part3", "label": "3. Configurando el plugin" },
         { "page": "part4", "label": "4. API del Plugin" },
         { "page": "part5", "label": "5. Divide los ingresos" },
-        { "page": "part6", "label": "6. Usandolo en un juego de Phaser" },
+        { "page": "part6", "label": "6. Usandolo en un juego" },
         { "page": "part7", "label": "7. Conclusión" }
     ]
 }

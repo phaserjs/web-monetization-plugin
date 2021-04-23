@@ -1,5 +1,5 @@
 ---
-title: Web Monetization for Games
+title: Web Monetization para Juegos
 subtitle: Parte 1 - ¿Qué es Web Monetization?
 date: 23rd April 2021
 author: Richard Davey

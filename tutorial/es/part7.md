@@ -1,6 +1,6 @@
 ---
-title: Web Monetization for Games
-subtitle: Conclusion
+title: Web Monetization para Juegos
+subtitle: Parte 7 - Conclusión
 date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm

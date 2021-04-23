@@ -1,5 +1,5 @@
 ---
-title: Web Monetization for Games
+title: Web Monetization para Juegos
 subtitle: Parte 6 - Como usar el plugin en un juego real
 date: 23rd April 2021
 author: Richard Davey
@@ -7,6 +7,10 @@ twitter: photonstorm
 ---
 
 Aprendimos a probar las diferentes característica del plugin en la parte anterior de esta serie de tutoriales. Si te lo perdiste, vuelve a leerlo antes. Ahora es el momento de usar el plugin en un juego de Phaser 3 adecuado. En este tutorial, tomaremos un juego Phaser listo para usar y trabajaremos en la implementación del plugin Game Web Monetization en él.
+
+![3 Candies!](part5/0-header.png)
+
+Antes de empezar, puedes jugar a [3 Candies!](https://photonstorm.github.io/gamewebmonetization/game/) es un juego hecho especialmente para esta serie de tutoriales. Se proporciona el código fuente completo y lo usaremos como ejemplo de como monetizar un juego de Phaser 3.
 
 ## Descarga los archivos del Juego
 
@@ -28,7 +32,7 @@ Una vez que los archivos estén en su computadora, encontrará el juego de muest
 
 Arrastre y suelte la carpeta en Visual Studio Code o su editor de elección para que pueda ver fácilmente el código fuente de los distintos archivos.
 
-# Estructura del proyecto
+## Estructura del proyecto
 
 Dentro de la carpeta del juego podemos ver un archivo `index.html`, junto con las carpetas `src` y `phaser`. Todo ya está preconfigurado para ejecutarse, así que vamos a sumergirnos en la carpeta `src`.
 

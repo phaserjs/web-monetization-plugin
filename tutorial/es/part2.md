@@ -1,5 +1,5 @@
 ---
-title: Web Monetization for Games
+title: Web Monetization para Juegos
 subtitle: Parte 2 - Coil y Uphold
 date: 23rd April 2021
 author: Richard Davey
@@ -10,8 +10,8 @@ Como hemos mencionado en el capítulo previo el usuario necesita un proveedor pa
 
 Actualmente el proveedor principal es Coil así que tendrás que registrarte en la página oficial de Coil y asignar tu payment pointer para poder probar que tus juegos están habilitados para la monetización. Repasaremos las partes claves del proceso. 
 
-1. Ve a la página oficial de [Coil](https://coil.com/) y crea una cuenta clicando en **Sing up**: ![Home Page](part2/1-homepage.png)
-2. Selecciona:  _Monetize Content_ opción. Ahora tienes que seleccionar sign-up: ![Sign Up](part2/2-signup_to_monetize.png)
+1. Ve a la página oficial de [Coil](https://coil.com/) y crea una cuenta clicando en **Sign up**: ![Home Page](part2/1-homepage.png)
+2. Selecciona:  _Monetize content_ opción. Ahora tienes que seleccionar sign-up: ![Sign Up](part2/2-signup_to_monetize.png)
 3. Rellena tus datos correctamente: ![Fill user data](part2/3-fill_user_data.png)
 4. Ve a tu correo, encuentra el código de verificación e ingresa el código: ![Verify Code](part2/4-verify_code.png)
 
