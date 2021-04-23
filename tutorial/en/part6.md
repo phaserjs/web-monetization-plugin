@@ -1,6 +1,6 @@
 ---
 title: Web Monetization for Games
-subtitle: How to Web Monetize a Phaser 3 game
+subtitle: Part 6 - How to Web Monetize a Phaser 3 game
 date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
