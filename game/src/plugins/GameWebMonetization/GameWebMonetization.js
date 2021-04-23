@@ -225,6 +225,7 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
       this.emit(_GameWebMonetization.START, event.detail);
     };
     this.onPending = (event) => {
+      this.setState();
       this.emit(_GameWebMonetization.PENDING, event.detail);
     };
     this.onProgress = (event) => {
@@ -243,13 +244,17 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
     this.setState();
   }
   start() {
-    this.addEvents();
-    this.addMeta();
+    if (document && document.monetization) {
+      this.addEvents();
+      this.addMeta();
+    }
     return this;
   }
   stop() {
-    this.removeEvents();
-    this.removeMeta();
+    if (document && document.monetization) {
+      this.removeEvents();
+      this.removeMeta();
+    }
     return this;
   }
   restart() {
