@@ -1,6 +1,6 @@
 ---
 title: Web Monetization for Games
-subtitle: Part 4 - Methods, Properties and Plugin Events
+subtitle: Part 4 - Métodos, Propiedades y Eventos
 date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
