@@ -12,7 +12,7 @@ Vamos a empezar a usar el plugin Game Web Monetization y a ver qué funciones es
 
 Antes de que empecemos deberías estar registrado con Coil y con un proveedor de billetera/wallet digital como Uphold. Si aún no lo has hecho por favor regresa a la [Parte 2](part2) y hazla, ya que todo lo que sigue desde este punto se basa en esa parte. 
 
-Logueate en el sitio oficial de [Coil](https://coil.com) y luego clica en **Settings** y busca **Payouts** y ahí verás tu payment pointer.
+Logueate en el sitio oficial de [Coil](https://coil.com) y luego clica en **Settings** y busca **Payouts** y ahí verás tu Payment Pointer.
 
 ![PaymentPointer](../img/part3/1-paymentpointer.png)
 
@@ -89,7 +89,7 @@ Ahora si volvemos a la web y actualizamos veremos que nuestro sitio empieza a mo
 
 1. Que tiene una cuenta de Coil con una suscripción.
 2. Que ha verificado completamente su servicio Uphold (u otra billetera)
-3. Que la URL del payment pointer se haya cambiado en el código por la suya.
+3. Que la URL del Payment Pointer se haya cambiado en el código por la suya.
 4. Que está usando un servidor para abrir la página de prueba, no abriéndola directamente en un navegador.
 
 ## Métodos, eventos y propiedades
@@ -143,7 +143,7 @@ Al manejador del evento (event) recibe un objeto que contiene las siguientes pro
 
 property | details
 --- | ---
-`paymentPointer` | Tu payment pointer. Es el mismo valor que has usado en la configuración.
+`paymentPointer` | Tu Payment Pointer. Es el mismo valor que has usado en la configuración.
 `requestId` | Este valor es un ID de dessión o ID de monetización (UUID v4) generado por el agente de usuario.
 
 Es posible que haya notado que nos han enviado tanto un `paymentPointer` como un` requestId`.
@@ -220,7 +220,7 @@ Y en la consola podrás ver lo siguiente:
 
 ### Evento pending
 
-Este evento se emite mientras la API de Web Monetization se prepara para comenzar a monetizar su sitio. Esto sucede después de llamar al método `start` en el complemento. La API entrará en un estado de 'pendiente', lo que significa que actualmente está negociando para comenzar con su payment pointer, pero aún no ha terminado de hacerlo. Si la negociación tiene éxito, el complemento emitirá su evento `START`.
+Este evento se emite mientras la API de Web Monetization se prepara para comenzar a monetizar su sitio. Esto sucede después de llamar al método `start` en el complemento. La API entrará en un estado de 'pendiente', lo que significa que actualmente está negociando para comenzar con su Payment Pointer, pero aún no ha terminado de hacerlo. Si la negociación tiene éxito, el complemento emitirá su evento `START`.
 
 Editemos nuestro `main.js` para demostrar este estado:
 
@@ -257,7 +257,7 @@ Si hay un error de red, por ejemplo, el wifi se desconecta, mientras que la soli
 
 ### Evento progress
 
-Cuando la API de monetización web se conecte con éxito a su payment pointer, comenzará a transmitir micropagos a su billetera. Cada vez que esto suceda, disparará un evento `PROGRESS`.
+Cuando la API de monetización web se conecte con éxito a su Payment Pointer, comenzará a transmitir micropagos a su billetera. Cada vez que esto suceda, disparará un evento `PROGRESS`.
 
 Este evento contiene muchos datos útiles, incluida la cantidad que se acaba de transmitir a su billetera y puede usarlo en su juego para realizar un seguimiento del flujo de pago, o tal vez usarlo para mostrar visualmente una animación especial o similar.
 
@@ -277,7 +277,7 @@ Este evento nos brinda muchas propiedades útiles:
 
 property | details
 --- | ---
-`paymentPointer` | Tu payment pointer. Es el mismo valor que has usado en la configuración.
+`paymentPointer` | Tu Payment Pointer. Es el mismo valor que has usado en la configuración.
 `requestId` | Este valor es un ID de dessión o ID de monetización (UUID v4) generado por el agente de usuario.
 `amount` | La cantidad de destino recibida según se especifica en el paquete del protcolo Interledger (ILP).
 `assetCode` | El código (normalmente tres caracteres) que identifica el tipo de unidad. Una unidad, por ejemplo podría ser una moneda (USD, XRP). 
