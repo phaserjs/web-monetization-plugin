@@ -289,7 +289,7 @@ property | details
 
 As you can see, that's a lot of handy data!
 
-Perhaps the most interesting properties are `assetCode` and `totalAmount`. The `assetCode` is the type of currency we are receiving, in this case it is the XRP cryptocurrency. Don't worry, the Interledger protocol will convert this automatically into your chosen currency.
+Perhaps the most interesting properties are `assetCode` and `totalAmount`. The `assetCode` is the type of currency we are receiving, in this case it is the XRP cryptocurrency. Even though your wallet may not be set for XRP this is the main currency Uphold transfers in. Don't worry, though, you will receive your actual desired currency in your wallet. If you are using a provider other than Uphold, then you should see that the currency matches that set in your wallet.
 
 The `totalAmount` is the amount of income that we have obtained so far from the player during _this play session_. This counter is reset if the page containing your game is refreshed. It doesn't persist longer than a single play session.
 
@@ -309,9 +309,9 @@ You can access the `total` at any point via the plugin instance:
 const currentTotal = gameWebMonetization.total;
 ```
 
-The currency of the `total` is set by the Web Monetization API and the Interledger protocol (typically USD or XRP), not by your wallet. This actual currency can be obtained from the `assetCode` property sent by the `PROGRESS` event.
+The currency of the `total` will vary based on the wallet service you are using. Uphold, as we're using here, uses XRP and then converts it into your chosen currency their end. However, other wallet services will transmit via the Interledger protocol in the actual currency of your wallet.
 
-The currency is automatically converted by the protocol to your wallets currency before being received. However, it's important to remember that if you've got say a DOGE Coin Payment Pointer, the `total` value isn't the amount of DOGE received, but an intermediary currency, likely XRP.
+This currency can be obtained via the `assetCode` property sent by the `PROGRESS` event. If it doesn't match that of your wallet, it's likely using XRP as an exchange currency. You can work out how much you've actually received, in your chosen currency, by using the `assetScale` property.
 
 ### The STOP Event
 
