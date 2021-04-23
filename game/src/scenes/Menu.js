@@ -1,16 +1,15 @@
 import { background_selected, gamewebmonetization } from "../global_vars.js";
 
-export class Menu extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'Menu'
-        });
+export class Menu extends Phaser.Scene
+{
+    constructor ()
+    {
+        super('Menu');
     }
 
     init ()
     {
         this.popfx = this.sound.add('pop');
-        this.cameras.main.fadeIn(600, 0, 0, 0);
     }
 
     create ()
@@ -24,6 +23,100 @@ export class Menu extends Phaser.Scene {
 
         this.logo = this.add.image(x, 60, '3candies').setScale(0);
 
+        const startText = this.add.bitmapText(x, 265, 'pixel2Border', 'CLICK TO START', 22, 1);
+        const backgroundText = this.add.bitmapText(x, 300, 'pixel2', 'CHOOSE BACKGROUND', 8);
+
+        startText.setOrigin(0.5).setTint(0xf1c40f);
+        backgroundText.setOrigin(0.5).setDropShadow(1, 1, 0x000000, 1);
+
+        this.isPremium = false;
+
+        const normalBackgroundButton = this.add.image(x - 45, 350, 'normal_background-button-selected');
+        const premiumBackgroundButton = this.add.image(x + 45, 350, 'premium_background-button');
+
+        normalBackgroundButton.setInteractive({ useHandCursor: true });
+        premiumBackgroundButton.setInteractive({ useHandCursor: true });
+
+        if (!gamewebmonetization.isMonetized)
+        {
+            premiumBackgroundButton.setAlpha(0.9);
+        }
+
+        //  Button Handlers
+
+        normalBackgroundButton.on('pointerover', () => {
+
+            if (this.isPremium)
+            {
+                normalBackgroundButton.setTexture('normal_background-button-hover');
+            }
+
+        });
+
+        normalBackgroundButton.on('pointerout', () => {
+
+            if (this.isPremium)
+            {
+                normalBackgroundButton.setTexture('normal_background-button');
+            }
+
+        });
+
+        normalBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+            this.popfx.play();
+
+            this.isPremium = false;
+
+            normalBackgroundButton.setTexture('normal_background-button-selected');
+            premiumBackgroundButton.setTexture('premium_background-button');
+
+            event.stopPropagation();
+
+        });
+
+        premiumBackgroundButton.on('pointerover', () => {
+
+            if (!this.isPremium)
+            {
+                premiumBackgroundButton.setTexture('premium_background-button-hover');
+            }
+
+        });
+
+        premiumBackgroundButton.on('pointerout', () => {
+
+            if (!this.isPremium)
+            {
+                premiumBackgroundButton.setTexture('premium_background-button');
+            }
+
+        });
+
+        premiumBackgroundButton.on('pointerdown', (pointer, x, y, event) => {
+
+            this.popfx.play();
+
+            if (gamewebmonetization.isMonetized)
+            {
+                this.isPremium = true;
+
+                normalBackgroundButton.setTexture('normal_background-button');
+                premiumBackgroundButton.setTexture('premium_background-button-selected');
+            }
+            else
+            {
+                alert('You need the plugin!');
+            }
+
+            event.stopPropagation();
+
+        });
+
+        this.input.once('pointerdown', this.startGame, this);
+
+        //  Tweens and Camera fade
+
         this.tweens.add({
             targets: this.logo,
             duration: 800,
@@ -31,7 +124,16 @@ export class Menu extends Phaser.Scene {
             scale: 1.8
         });
 
-        this.buttons();
+        this.tweens.add({
+            targets: startText,
+            alpha: 0,
+            duration: 0,
+            repeat: -1,
+            hold: 800,
+            repeatDelay: 2000
+        });
+
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
     }
 
     update ()
@@ -40,120 +142,10 @@ export class Menu extends Phaser.Scene {
         this.background.tilePositionY += 0.3;
     }
 
-    buttons ()
-    {
-        const x = this.scale.width / 2;
-        const y = this.scale.height / 2;
-
-        // click to start
-        const text_start = this.add.dynamicBitmapText(
-            x,
-            y + 40,
-            'pixel2Border',
-            'CLICK TO START',
-            22,
-            1)
-            .setOrigin(.5)
-            .setTint(0xf1c40f)
-       
-        this.tweens.add({
-            targets: [ text_start ],
-            alpha: 0,
-            duration: 500,
-            ease: (e) => Math.round(e),
-            repeat: -1,
-            yoyo: -1
-        });
-
-        // Select backgrounds
-        const text_change_background = this.add.dynamicBitmapText(
-            x,
-            this.scale.height - 150,
-            'pixel2',
-            'CHOOSE BACKGROUND',
-            8)
-            .setOrigin(.5);
-
-        const normal_background_button = this.add.image(x - 45, this.scale.height - 100, 'normal_background-button-selected2')
-            .setInteractive({
-                'cursor': 'pointer'
-            })
-            .setData({
-                'active': true
-            })
-            .setName('background_buttons-normal');
-
-        const premium_background_button = this.add.image(x + 45, this.scale.height - 100, 'premium_background-button')
-            .setInteractive({
-                'cursor': 'pointer'
-            })
-            .setData({
-                'active': false,
-                'plugin_active': gamewebmonetization.isMonetized
-            })
-            .setAlpha(
-                gamewebmonetization.isMonetized ? 1 : .6
-            )
-            .setName('background_buttons-premium');
-
-        normal_background_button.on(Phaser.Input.Events.POINTER_OVER, () => {
-            if(!normal_background_button.getData('active')) {
-                normal_background_button.setTexture('normal_background-button-hover');
-            }
-        });
-        normal_background_button.on(Phaser.Input.Events.POINTER_OUT, () => {
-            if(!normal_background_button.getData('active')) {
-                normal_background_button.setTexture('normal_background-button');
-            }
-        });
-
-        premium_background_button.on(Phaser.Input.Events.POINTER_OVER, () => {
-            if(!premium_background_button.getData('active')) {
-                premium_background_button.setTexture('premium_background-button-hover');
-            }
-        });
-        premium_background_button.on(Phaser.Input.Events.POINTER_OUT, () => {
-            if(!premium_background_button.getData('active')) {
-                premium_background_button.setTexture('premium_background-button');
-            }
-        });
-
-        // Click to start
-        this.input.on(Phaser.Input.Events.POINTER_DOWN, (Pointer, GameObject) => {
-            // If is background selector doesn't change scene
-            const gameobject = GameObject[0];
-            if (gameobject === undefined) {
-                this.startGame();
-            } else {
-                if (gameobject.name.startsWith('background_buttons')) {
-                    if (gameobject.name.endsWith('normal')) {
-                        this.popfx.play();
-                        background_selected.active = "normal";
-                        gameobject.setData({'active': true});
-                        gameobject.setTexture('normal_background-button-selected');
-                        premium_background_button.setTexture('premium_background-button');
-                        premium_background_button.setData({'active': false});
-                    }
-                    if (gameobject.name.endsWith('premium')) {
-                        if(gameobject.getData('plugin_active')) {
-                            this.popfx.play();
-                            background_selected.active = "premium";
-                            gameobject.setData({'active': true});
-                            gameobject.setTexture('premium_background-button-selected');
-                            normal_background_button.setTexture('normal_background-button');
-                            normal_background_button.setData({'active': false});
-                        } else {
-                            alert('You need the plugin!');
-                        }
-                    }
-                }
-            }
-
-        })
-    }
-
     startGame ()
     {
+        background_selected.active = (this.isPremium) ? 'premium' : 'normal';
+ 
         this.tweens.add({
             targets: this.logo,
             duration: 2000,

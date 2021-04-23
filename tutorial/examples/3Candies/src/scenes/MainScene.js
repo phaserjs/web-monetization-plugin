@@ -1,9 +1,9 @@
-import { candy_grid, count_down, minimun_to_search } from '../global_vars.js';
-
 import { constructorConfeti as Confetis } from '../GameObjects/Confetis.js';
 import { GetName } from '../helpers/GetName.js';
 import { Lifes } from '../GameObjects/Lifes.js';
 import { RandomButtom } from '../GameObjects/RandomButtom.js';
+
+import { candy_grid, count_down, minimun_to_search, gamewebmonetization } from '../global_vars.js';
 
 export class MainScene extends Phaser.Scene {
     constructor() {

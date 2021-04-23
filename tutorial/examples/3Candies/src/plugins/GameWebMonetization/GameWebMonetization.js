@@ -238,7 +238,6 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
         this.setState();
         this.isMonetized = false;
         this.emit(_GameWebMonetization.STOP, event.detail);
-        this.removeEvents();
       }
     };
     this.changePaymentPointer(config);
@@ -252,7 +251,10 @@ var _GameWebMonetization = class extends import_eventemitter3.EventEmitter {
     return this;
   }
   stop() {
-    this.removeMeta();
+    if (document && document.monetization) {
+      this.removeEvents();
+      this.removeMeta();
+    }
     return this;
   }
   restart() {

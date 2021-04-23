@@ -1,7 +1,7 @@
 ---
 title: Web Monetization for Games
 subtitle: Part 2 - Coil and Uphold
-date: 
+date: 23rd April 2021
 author: Richard Davey
 twitter: photonstorm
 ---
