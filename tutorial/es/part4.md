@@ -23,7 +23,7 @@ on('event-name', eventHandler, context);
 off('event-name', eventHandler, context);
 ```
 
-Si prefiere ser más detallado, puede usar `addListener` en lugar de` on` y `removeListener` en lugar de` off`. Usaremos la versión corta en el siguiente código.
+Si prefiere ser más detallado, puede usar `addListener` en lugar de `on` y `removeListener` en lugar de `off`. Usaremos la versión corta en el siguiente código.
 
 ### Evento start.
 
@@ -37,7 +37,7 @@ gameWebMonetization.on(GameWebMonetization.START, (event) => {
 });
 ```
 
-**Sugerencia:** ¡Recuerde hacer esto _antes_ de llamar a `start()` en el complemento!
+**Sugerencia:** ¡Recuerde llamar _antes_ el evento y despues a `start()` en el plugin!
 
 Para probarlo, vamos a hacer un console.log cuando el evento es disparado, para que podamos obeservar que nos devuelve en nuestra consola Dev Tool del navegador.
 
@@ -240,7 +240,7 @@ gameWebMonetization.on(GameWebMonetization.STOP, (event) => {
 
 Una vez que se crea el manejador de eventos, se emitirá si llamamos al método `stop` o cambiamos a otra pestaña del navegador.
 
-Intente ejecutar lo anterior y luego cambiar dentro y fuera de la pestaña varias veces. Debería ver un evento `STOP` cada vez que haga esto:
+Intente ejecutar lo anterior y luego cambia de pestaña varias veces. Debería ver un evento `STOP` cada vez que haga esto:
  
 ![Event Stop](part3/11-stop_event.png)
 
@@ -274,6 +274,6 @@ gameWebMonetization.changePaymentPointer({
 gameWebMonetization.restart();
 ```
 
-Llamar a `changePaymentPointer()` solo prepara el complemento para el cambio, pero no lo hace. Para eso, necesita llamar al método `restart()`, como en el código de ejemplo anterior.
+Llamar a `changePaymentPointer()` solo prepara el complemento para el cambio, pero no realiza el cambio. Para eso, necesita llamar al método `restart()`, como en el código de ejemplo anterior.
 
-Los punteros de pago también se pueden proporcionar como una matriz ponderada. Esto le permite aprovechar el reparto de ingresos probabilístico, que trataremos en la siguiente parte del tutorial.
+Los Payment Pointers también se pueden pasar como un array ponderado. Esto le permite aprovechar el reparto de ingresos probabilístico, que trataremos en la siguiente parte del tutorial.

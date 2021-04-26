@@ -28,7 +28,7 @@ O ssh:
 git@github.com:photonstorm/gamewebmonetization.git
 ```
 
-Si l prefieres puedes [descargar un archivo zip](https://github.com/photonstorm/gamewebmonetization/archive/refs/heads/main.zip) de todo el repositorio.
+Si lo prefieres puedes [descargar un archivo zip](https://github.com/photonstorm/gamewebmonetization/archive/refs/heads/main.zip) de todo el repositorio.
 
 Una vez que los archivos estén en su computadora/ordenador, encontrará el plugin en la carpeta `plugin/dist/`, se llama `GameWebMonetization.js`.
 
@@ -60,7 +60,7 @@ copia el plugin desde `plugin/dist/GameWebMonetization.js` - pegue este archivo 
 
 ![Base](part3/3-basefileswithplutin.png)
 
-Esta versión del plugin se expone como un ESM (Módulo ES), por lo que podemos cargarlo directamente en `main.js`. Para este tutorial usaremos importaciones y JavaScript moderno. Sin embargo, también puede encontrar las versiones ES5 y TypeScript del complemento en el repositorio de GitHub, en caso de que las necesite. Sin embargo, para el resto de este tutorial, asumiremos que está utilizando el ESM.
+Esta versión del plugin se publicó como un ESM (Módulo ES), por lo que podemos cargarlo directamente en `main.js`. Para este tutorial usaremos las importaciones y JavaScript moderno. Sin embargo, también puede encontrar las versiones ES5 y TypeScript del complemento en el repositorio de GitHub, en caso de que las necesite. Sin embargo, para el resto de este tutorial, asumiremos que está utilizando el ESM.
 
 Editemos `main.js` para importar nuestro complemento:
 
@@ -68,7 +68,7 @@ Editemos `main.js` para importar nuestro complemento:
 import { GameWebMonetization } from './GameWebMonetization.js';
 ```
 
-Con el módulo importado podemos instanciar el complemento. El constructor requiere un objeto de configuración que contenga un `paymentPointer`. Por eso es importante que ya haya obtenido uno de su servicio de billetera.
+Con el módulo importado podemos instanciar el complemento. El constructor requiere un objeto de configuración que contenga un `paymentPointer`. Por eso es importante que ya haya obtenido uno de su servicio de billetera/wallet.
 
 Agregue lo siguiente a `main.js` y recuerde reemplazar el valor de `paymentPointer` a continuación por el suyo:
 
@@ -103,7 +103,7 @@ Ahora si volvemos a la web y actualizamos veremos que nuestro sitio empieza a mo
 
 ![is monetizable](part3/5-ismonetizable.png)
 
-**Felicidades**. Esta página ahora está transmitiendo pequeñas cantidades de dinero a su billetera digital a través del protocolo Interledger. Si algo salió mal, recuerde verificar:
+**Felicidades**. Esta página ahora está transmitiendo pequeñas cantidades de dinero a su billetera o wallet digital a través del protocolo Interledger. Si algo salió mal, recuerde verificar:
 
 1. Que tiene una cuenta de Coil con una suscripción.
 2. Que ha verificado completamente su servicio Uphold (u otra billetera)

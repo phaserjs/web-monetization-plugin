@@ -31,9 +31,9 @@ const gameWebMonetization = new GameWebMonetization([
 ]);
 ```
 
-Las propiedades de `weight` controlan el porcentaje de probabilidad de que el complemento seleccione ese proveedor de pago. Por lo tanto, el valor total de `weight` cuando se suman todos juntos no deben exceder de 100.
+Las propiedades de `weight` controlan el porcentaje de probabilidad de que el complemento seleccione ese proveedor de pago. Por lo tanto, el valor total de `weight` cuando se suman todos juntos no deben exceder a 100.
 
-Depende de usted cómo se distribuyen los pesos. Por ejemplo, es posible que desee dividir uniformemente los pesos (weights) entre todos los miembros del equipo del juego. ¿O quizás le das al desarrollador un peso del 70% y al artista un peso del 30%? Depende completamente de ti. El valor de `weight` pasado controla directamente la posibilidad de que esa billetera/wallet sea seleccionada cuando se inicia la API de monetización web.
+De ti depende la distribución del weight. Por ejemplo, es posible que desee dividir uniformemente los pesos (weights) entre todos los miembros del equipo del juego. ¿O quizás le das al desarrollador un peso del 70% y al artista un peso del 30%? Depende completamente de ti. El valor de `weight` pasado controla directamente la posibilidad de que esa billetera/wallet sea seleccionada cuando se inicia la API de monetización web.
 
 Aquí hay una prueba completa de `main.js` para que veas esto en acción:
 
