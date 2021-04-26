@@ -6,7 +6,7 @@ author: Richard Davey
 twitter: photonstorm
 ---
 
-Como hemos mencionado en el capítulo previo el usuario necesita un proveedor para que el pueda ingresar dinero y que este se reparta automáticamente por todas las páginas visitadas (quieres saber más sobre cómo se reparte el dinero: clica [aqí](https://help.coil.com/docs/general-info/intro-to-coil/index.html#how-is-coil-different-from-other-membership-services-like-patreon-and-flattr)). 
+Como hemos mencionado en el capítulo previo el usuario necesita un proveedor para que el pueda ingresar dinero y que este se reparta automáticamente por todas las páginas visitadas (quieres saber más sobre cómo se reparte el dinero: clica [aquí](https://help.coil.com/docs/general-info/intro-to-coil/index.html#how-is-coil-different-from-other-membership-services-like-patreon-and-flattr)). 
 
 Actualmente el proveedor principal es Coil así que tendrás que registrarte en la página oficial de Coil y asignar tu payment pointer para poder probar que tus juegos están habilitados para la monetización. Repasaremos las partes claves del proceso. 
 
